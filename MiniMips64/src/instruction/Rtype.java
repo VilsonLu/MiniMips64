@@ -42,6 +42,7 @@ public abstract class Rtype extends Instruction {
 		this.rs = Integer.parseInt(rs); 
 	}
 
+	
 	public int getRt() { 
 		return rt;	
 	}
@@ -61,6 +62,7 @@ public abstract class Rtype extends Instruction {
 		this.rd = Integer.parseInt(rd); 
 	}
 
+	
 	public int getFunc() { 
 		return func; 
 	}
