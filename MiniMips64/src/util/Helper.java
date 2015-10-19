@@ -1,12 +1,25 @@
+package util;
 import java.math.BigInteger;
 import java.util.ArrayList;
 
 
 public class Helper {
-	private static int HEXNUM =4;
+	private static final int HEXNUM =4;
+	
 	public static String IntToBinary(int number){
 		return Integer.toBinaryString(number);
 	}
+	
+	
+	public static String IntToBinary5(int number) {
+		return String.format("%05d", Integer.parseInt(IntToBinary(number)));
+	}
+	
+	
+	public static String IntToBinary6(int number) {
+		return String.format("%06d", Integer.parseInt(IntToBinary(number)));
+	}
+	
 	
 	public static String BinaryToHex(String binary) throws Exception{
 		int binLength = binary.length();
