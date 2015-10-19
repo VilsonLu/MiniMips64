@@ -25,5 +25,6 @@ public class Driver {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		System.out.println(daddu.getStringCode());
 	}
 }

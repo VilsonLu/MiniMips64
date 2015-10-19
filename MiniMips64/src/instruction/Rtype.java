@@ -21,6 +21,18 @@ public abstract class Rtype extends Instruction {
 	}
 
 	
+	protected String getStringCode3regs() {
+		StringBuilder code = new StringBuilder(this.getStringOpcode());
+		code.append(" r");
+		code.append(this.getRd());
+		code.append(", r");
+		code.append(this.getRs());
+		code.append(", r");
+		code.append(this.getRt());
+		return code.toString();
+	}
+	
+	
 	public int getRs() { 
 		return rs; 
 	}
@@ -39,6 +51,7 @@ public abstract class Rtype extends Instruction {
 		this.rt = Integer.parseInt(rt); 
 	}
 
+	
 	public int getRd() { 
 		return rd; 
 	}
