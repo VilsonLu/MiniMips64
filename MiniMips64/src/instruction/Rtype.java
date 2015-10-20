@@ -16,10 +16,19 @@ public abstract class Rtype extends Instruction {
 	
 	
 	public String getBinaryCode() {
-		return this.getOpcode() + Helper.IntToBinary5(rs) + Helper.IntToBinary5(rt)
-				+ Helper.IntToBinary5(rd) + Helper.IntToBinary5(0) + Helper.IntToBinary5(func);
+		return Helper.IntToBinary6(this.getOpcode()) + Helper.IntToBinary5(rs) + Helper.IntToBinary5(rt)
+				+ Helper.IntToBinary5(rd) + Helper.IntToBinary5(0) + Helper.IntToBinary6(func);
 	}
 
+	protected String getStringCode2regs() {
+		StringBuilder code = new StringBuilder(this.getStringOpcode());
+		code.append(" r");
+		code.append(this.getRs());
+		code.append(", r");
+		code.append(this.getRt());
+		return code.toString();
+	}
+	
 	
 	protected String getStringCode3regs() {
 		StringBuilder code = new StringBuilder(this.getStringOpcode());

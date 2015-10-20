@@ -1,5 +1,7 @@
 import instruction.Daddu;
+import instruction.Dmult;
 import instruction.Instruction;
+import instruction.Rtype;
 import util.Helper;
 
 public class Driver {
@@ -10,21 +12,40 @@ public class Driver {
 			// System.out.println(Helper.BinaryToHex("11001111"));
 			// System.out.println(Helper.BinaryToHex("11000110"));
 			// System.out.println(Helper.IntToBinary5(18));
-			new Driver().testInstruction();
+			new Driver().testDaddu();
+			new Driver().testMult();
+			// new Driver().testHelper();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
-	void testInstruction() {
-		Instruction daddu = new Daddu("1,2,3");
-		System.out.println(daddu.getBinaryCode());
+	void testHelper() {
+		System.out.println(Helper.IntToBinary5(0));
+	}
+	
+	void testDaddu() {
+		Rtype dmult = new Daddu("1,2,3");
+		System.out.println(dmult.getStringCode());
+		System.out.println(dmult.getBinaryCode());
 		try {
-			System.out.println(Helper.BinaryToHex(daddu.getBinaryCode()));
+			System.out.println(Helper.BinaryToHex(dmult.getBinaryCode()));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		System.out.println(daddu.getStringCode());
+		
+	}
+	
+	void testMult() {
+		Rtype dmult = new Dmult("1,2");
+		System.out.println(dmult.getStringCode());
+		System.out.println(dmult.getBinaryCode());
+		try {
+			System.out.println(Helper.BinaryToHex(dmult.getBinaryCode()));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 }

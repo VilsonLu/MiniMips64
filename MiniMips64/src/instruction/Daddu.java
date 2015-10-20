@@ -12,11 +12,11 @@ public class Daddu extends Rtype {
 
 	
 	@Override
-	public void execute() {}
-
-	
-	@Override
 	public String getStringCode() {
 		return this.getStringCode3regs();
 	}
+	
+
+	@Override
+	public void execute() {}
 }

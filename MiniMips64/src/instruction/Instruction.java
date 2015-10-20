@@ -21,8 +21,8 @@ public abstract class Instruction {
 	}
 	
 
-	protected String getOpcode() {
-		return Helper.IntToBinary6(opcode);
+	protected int getOpcode() {
+		return opcode;
 	}
 	
 }
