@@ -1,6 +1,7 @@
 import instruction.Daddu;
 import instruction.Dmult;
 import instruction.Instruction;
+import instruction.Or;
 import instruction.Rtype;
 import util.Helper;
 
@@ -12,8 +13,8 @@ public class Driver {
 			// System.out.println(Helper.BinaryToHex("11001111"));
 			// System.out.println(Helper.BinaryToHex("11000110"));
 			// System.out.println(Helper.IntToBinary5(18));
-			new Driver().testDaddu();
-			new Driver().testMult();
+			new Driver().testOr();
+			// new Driver().testMult();
 			// new Driver().testHelper();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -25,20 +26,8 @@ public class Driver {
 		System.out.println(Helper.IntToBinary5(0));
 	}
 	
-	void testDaddu() {
-		Rtype dmult = new Daddu("1,2,3");
-		System.out.println(dmult.getStringCode());
-		System.out.println(dmult.getBinaryCode());
-		try {
-			System.out.println(Helper.BinaryToHex(dmult.getBinaryCode()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-	}
-	
-	void testMult() {
-		Rtype dmult = new Dmult("1,2");
+	void testOr() {
+		Rtype dmult = new Or("1,2,3");
 		System.out.println(dmult.getStringCode());
 		System.out.println(dmult.getBinaryCode());
 		try {
