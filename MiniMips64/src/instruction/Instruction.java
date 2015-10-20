@@ -25,4 +25,8 @@ public abstract class Instruction {
 		return opcode;
 	}
 	
+	@Override
+	public String toString() {
+		return this.getStringCode();
+	}
 }

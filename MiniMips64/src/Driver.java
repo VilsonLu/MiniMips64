@@ -34,7 +34,6 @@ public class Driver {
 			System.out.println(Helper.BinaryToHex(dmult.getBinaryCode()));
 		} catch (Exception e) {
 			e.printStackTrace();
-		}
-		
+		}	
 	}
 }
