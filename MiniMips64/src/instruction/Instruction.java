@@ -1,6 +1,5 @@
 package instruction;
 
-import util.Helper;
 
 public abstract class Instruction {
 	private final String stringOpcode;
