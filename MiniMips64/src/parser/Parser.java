@@ -47,6 +47,9 @@ public class Parser {
 	        	Line nextline;
 				try {
 					nextline = this.parseLine(line);
+					if (nextline == null) {
+						continue;
+					}
 					lines.add(nextline);
 				} catch (MipsException e) {
 					exceptionList.add(e);
@@ -69,6 +72,10 @@ public class Parser {
 	public Line parseLine(String line) throws MipsException {
 		String[] splitLine = line.split(";", 2);
 		String comment = "";
+		if (splitLine[0].trim().isEmpty()) {
+			return null;
+		}
+		
 		if (splitLine.length > 1) {
 			comment = splitLine[1].trim();
 		}

@@ -16,6 +16,7 @@ public class InstructionFactory {
 	public Instruction getInstruction(String line) throws MipsException {
 		line = line.trim();
 		String[] splitLine = line.split(" ", 2);
+		
 		String arguments = splitLine[1];
 		arguments = this.formatRegisters(arguments);
 		
