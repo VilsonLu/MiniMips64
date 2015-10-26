@@ -1,4 +1,4 @@
-package register;
+package instruction;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -6,9 +6,9 @@ import java.util.regex.Pattern;
 import util.MipsException;
 import util.MipsExceptionList;
 
-public final class RegisterUtil {
+public final class InstructionUtil {
 	
-	private RegisterUtil() {
+	private InstructionUtil() {
 	}
 	
 	

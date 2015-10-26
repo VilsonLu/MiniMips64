@@ -5,7 +5,6 @@ import instruction.itype.Beq;
 import instruction.rtype.Daddu;
 import instruction.rtype.Dmult;
 import instruction.rtype.Or;
-import register.RegisterUtil;
 import util.MipsException;
 import util.MipsExceptionList;
 
@@ -17,7 +16,7 @@ public class InstructionFactory {
 		String[] splitLine = line.split(" ", 2);
 		
 		String arguments = splitLine[1];
-		arguments = RegisterUtil.formatRegisters(arguments);
+		arguments = InstructionUtil.formatRegisters(arguments);
 		
 		Instruction instruction = null;
 		switch (splitLine[0].toLowerCase()) {
