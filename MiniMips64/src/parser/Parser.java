@@ -52,6 +52,7 @@ public class Parser {
 					}
 					lines.add(nextline);
 				} catch (MipsException e) {
+					e.setInstructionString(line);
 					exceptionList.add(e);
 				}
 	        	
@@ -69,7 +70,7 @@ public class Parser {
 		return lines;
 	}
 	
-	public Line parseLine(String line) throws MipsException {
+	public Line parseLine(String line) throws MipsException, MipsExceptionList {
 		String[] splitLine = line.split(";", 2);
 		String comment = "";
 		if (splitLine[0].trim().isEmpty()) {

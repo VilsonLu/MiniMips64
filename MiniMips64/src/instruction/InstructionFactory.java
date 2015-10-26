@@ -2,23 +2,20 @@ package instruction;
 
 import util.MipsException;
 
+import register.RegisterUtil;
+import util.MipsException;
+import util.MipsExceptionList;
+
 public class InstructionFactory {
 	
 	
-	private String formatRegisters(String registers) {
-		String formatted = "";
-		formatted = registers.replace("r", "");
-		formatted = formatted.replace(" ", "");
-		
-		return formatted;
-	}
 	
-	public Instruction getInstruction(String line) throws MipsException {
+	public Instruction getInstruction(String line) throws MipsException, MipsExceptionList {
 		line = line.trim();
 		String[] splitLine = line.split(" ", 2);
 		
 		String arguments = splitLine[1];
-		arguments = this.formatRegisters(arguments);
+		arguments = RegisterUtil.formatRegisters(arguments);
 		
 		Instruction instruction = null;
 		switch (splitLine[0].toLowerCase()) {
