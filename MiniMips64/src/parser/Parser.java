@@ -52,6 +52,7 @@ public class Parser {
 					}
 					lines.add(nextline);
 				} catch (MipsException e) {
+					e.setInstructionString(line);
 					exceptionList.add(e);
 				}
 	        	

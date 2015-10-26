@@ -3,7 +3,7 @@ package instruction;
 public class Or extends Rtype {
 	
 	public Or(String registerString) {
-		super("Or", 37);
+		super("OR", 37);
 		String registers[] = registerString.split(","); // rd, rs, rt
 		this.setRd(registers[0]);
 		this.setRs(registers[1]);
