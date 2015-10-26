@@ -1,13 +1,15 @@
 package instruction;
 
 import util.MipsException;
-
+import instruction.itype.Beq;
+import instruction.rtype.Daddu;
+import instruction.rtype.Dmult;
+import instruction.rtype.Or;
 import register.RegisterUtil;
 import util.MipsException;
 import util.MipsExceptionList;
 
 public class InstructionFactory {
-	
 	
 	
 	public Instruction getInstruction(String line) throws MipsException, MipsExceptionList {
@@ -19,7 +21,6 @@ public class InstructionFactory {
 		
 		Instruction instruction = null;
 		switch (splitLine[0].toLowerCase()) {
-		
 		// R-type
 		case "daddu":
 			instruction = new Daddu(arguments);
@@ -30,7 +31,12 @@ public class InstructionFactory {
 		case "or":
 			instruction = new Or(arguments);
 			break;
-		
+			
+		// I-type
+		case "beq":
+			instruction = new Beq(arguments);
+			break;
+			
 		default: 
 			throw new MipsException("Undefined instruction: " + splitLine[0]);
 		}

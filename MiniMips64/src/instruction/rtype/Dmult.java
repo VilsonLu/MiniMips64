@@ -1,4 +1,4 @@
-package instruction;
+package instruction.rtype;
 
 public class Dmult extends Rtype {
 

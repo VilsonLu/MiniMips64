@@ -9,7 +9,7 @@ public abstract class Instruction {
 	public abstract void execute();
 	
 	
-	Instruction(String stringOpcode, int opcode) {
+	protected Instruction(String stringOpcode, int opcode) {
 		this.stringOpcode = stringOpcode;
 		this.opcode = opcode;
 	}
@@ -23,6 +23,7 @@ public abstract class Instruction {
 	protected int getOpcode() {
 		return opcode;
 	}
+	
 	
 	@Override
 	public String toString() {

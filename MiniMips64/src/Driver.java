@@ -1,8 +1,8 @@
-import instruction.Daddu;
-import instruction.Dmult;
 import instruction.Instruction;
-import instruction.Or;
-import instruction.Rtype;
+import instruction.rtype.Daddu;
+import instruction.rtype.Dmult;
+import instruction.rtype.Or;
+import instruction.rtype.Rtype;
 import util.Helper;
 
 public class Driver {
