@@ -14,7 +14,7 @@ public abstract class Instruction {
 		this.opcode = opcode;
 	}
 	
-		
+	
 	protected String getStringOpcode() {
 		return stringOpcode;
 	}

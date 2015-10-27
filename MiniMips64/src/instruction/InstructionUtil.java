@@ -12,10 +12,7 @@ public final class InstructionUtil {
 	}
 	
 	
-	public static String formatRegisters(String registerString) throws MipsExceptionList {
-		registerString = registerString.replace(" ", "");
-		String[] registers = registerString.split(","); 
-		
+	private static String[] checkRegisters(String[] registers, int length) throws MipsExceptionList {
 		MipsExceptionList exceptionList = new MipsExceptionList();
 		for (int i = 0; i < registers.length; i++) {
 			String register = registers[i]; 
@@ -41,6 +38,64 @@ public final class InstructionUtil {
 		if (!exceptionList.isEmpty()) {
 			throw exceptionList;
 		}
+		
+		return registers;
+	}
+	
+	
+	private static void checkOffset(String offset) throws MipsException {
+		Pattern p = Pattern.compile("[A-F,0-9]{4}");
+		Matcher m = p.matcher(offset);
+		if (m.matches()) {
+			
+		}
+		
+		p = Pattern.compile("[0,1][A-F,0-9]{3}");
+		m = p.matcher(offset);
+		if (m.matches()) {
+			
+		}
+	}
+	
+	
+	public static String formatRegisters(String registerString) throws MipsExceptionList {
+		registerString = registerString.replace(" ", "");
+		String[] registers = registerString.split(","); 
+		
+		MipsExceptionList exceptionList = new MipsExceptionList();
+		try {
+			registers = InstructionUtil.checkRegisters(registers, registers.length);
+			
+		} catch (MipsExceptionList e) {
+			exceptionList = e;
+		}
+		
+		if (!exceptionList.isEmpty()) {
+			throw exceptionList;
+		}
+		
+		return String.join(",", registers);
+	}
+	
+	
+	public static String formatRegisterOffset(String registerString) throws MipsExceptionList {
+		registerString = registerString.replace(" ", "");
+		String[] registers = registerString.split(","); 
+		
+		MipsExceptionList exceptionList = new MipsExceptionList();
+				
+		try {
+			InstructionUtil.checkRegisters(registers, registers.length);
+		} catch (MipsExceptionList e) {
+			exceptionList = e;
+		}
+		
+		
+		
+		if (!exceptionList.isEmpty()) {
+			throw exceptionList;
+		}
+		
 		
 		return String.join(",", registers);
 		

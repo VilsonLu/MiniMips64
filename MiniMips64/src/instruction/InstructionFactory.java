@@ -5,7 +5,6 @@ import instruction.itype.Beq;
 import instruction.rtype.Daddu;
 import instruction.rtype.Dmult;
 import instruction.rtype.Or;
-import util.MipsException;
 import util.MipsExceptionList;
 
 public class InstructionFactory {
