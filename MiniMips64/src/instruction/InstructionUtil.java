@@ -64,8 +64,7 @@ public final class InstructionUtil {
 		
 		MipsExceptionList exceptionList = new MipsExceptionList();
 		try {
-			registers = InstructionUtil.checkRegisters(registers, registers.length);
-			
+			registers = InstructionUtil.checkRegisters(registers, registers.length);		
 		} catch (MipsExceptionList e) {
 			exceptionList = e;
 		}
@@ -96,8 +95,6 @@ public final class InstructionUtil {
 			throw exceptionList;
 		}
 		
-		
-		return String.join(",", registers);
-		
+		return String.join(",", registers);		
 	}
 }
