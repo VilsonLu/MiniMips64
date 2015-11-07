@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public class RegisterManager {
+public class RegisterMgr {
 	private final int TOTAL_REGS = 32;
 	private List<Register> dataRegs;
 	private Register hi;
@@ -14,7 +14,7 @@ public class RegisterManager {
 	private Map<String, Register> internalRegs;
 	
 	
-	public RegisterManager() {
+	public RegisterMgr() {
 		dataRegs = new ArrayList<>();
 		for (int i = 0; i < TOTAL_REGS; i++) {
 			dataRegs.add(new Register());
