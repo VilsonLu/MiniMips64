@@ -8,39 +8,39 @@ import java.util.Map;
 
 public class RegisterMgr {
 	private final int TOTAL_REGS = 32;
-	private List<Register> dataRegs;
-	private Register hi;
-	private Register lo;
-	private Map<String, Register> internalRegs;
+	private List<RegisterCell> dataRegs;
+	private RegisterCell hi;
+	private RegisterCell lo;
+	private Map<String, RegisterCell> internalRegs;
 	
 	
 	public RegisterMgr() {
 		dataRegs = new ArrayList<>();
 		for (int i = 0; i < TOTAL_REGS; i++) {
-			dataRegs.add(new Register());
+			dataRegs.add(new RegisterCell());
 		}
-		lo = new Register();
-		hi = new Register();
+		lo = new RegisterCell();
+		hi = new RegisterCell();
 		
 		internalRegs = new LinkedHashMap<>();
 		
-		internalRegs.put("IF//ID.IR", new Register());
-		internalRegs.put("IF//ID.NPC", new Register());
-		internalRegs.put("PC", new Register());
+		internalRegs.put("IF//ID.IR", new RegisterCell());
+		internalRegs.put("IF//ID.NPC", new RegisterCell());
+		internalRegs.put("PC", new RegisterCell());
 		
-		internalRegs.put("ID//EX.IR", new Register());
-		internalRegs.put("ID//EX.A", new Register());
-		internalRegs.put("ID//EX.B", new Register());
-		internalRegs.put("ID//EX.IMM", new Register());
+		internalRegs.put("ID//EX.IR", new RegisterCell());
+		internalRegs.put("ID//EX.A", new RegisterCell());
+		internalRegs.put("ID//EX.B", new RegisterCell());
+		internalRegs.put("ID//EX.IMM", new RegisterCell());
 		
-		internalRegs.put("EX//MEM.IR", new Register());
-		internalRegs.put("EX//MEM.ALUOUTPUT", new Register());
-		internalRegs.put("EX//MEM.B", new Register());
-		internalRegs.put("EX//MEM.COND", new Register());
+		internalRegs.put("EX//MEM.IR", new RegisterCell());
+		internalRegs.put("EX//MEM.ALUOUTPUT", new RegisterCell());
+		internalRegs.put("EX//MEM.B", new RegisterCell());
+		internalRegs.put("EX//MEM.COND", new RegisterCell());
 		
-		internalRegs.put("MEM//WB.IR", new Register());
-		internalRegs.put("MEM//WB.ALUOUTPUT", new Register());
-		internalRegs.put("MEM//WB.LMD", new Register());
+		internalRegs.put("MEM//WB.IR", new RegisterCell());
+		internalRegs.put("MEM//WB.ALUOUTPUT", new RegisterCell());
+		internalRegs.put("MEM//WB.LMD", new RegisterCell());
 	}
 	
 	

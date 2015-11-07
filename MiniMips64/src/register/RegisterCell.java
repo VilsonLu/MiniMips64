@@ -1,11 +1,11 @@
 package register;
 
-public class Register {
+public class RegisterCell {
 	private final int BITS = 64;
 	private byte[] value;
 	
 	
-	Register() {
+	RegisterCell() {
 		value = new byte[BITS];
 	}
 	
