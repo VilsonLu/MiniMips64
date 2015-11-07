@@ -5,15 +5,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+
 public class RegisterManager {
 	private final int TOTAL_REGS = 32;
-	// data registers
 	private List<Register> dataRegs;
-	private Map<String, Register> internalRegs;
 	private Register hi;
 	private Register lo;
+	private Map<String, Register> internalRegs;
 	
-	// internal registers
 	
 	public RegisterManager() {
 		dataRegs = new ArrayList<>();
@@ -45,15 +44,39 @@ public class RegisterManager {
 	}
 	
 	
-	public byte[] getValue(String regKey) {
-		if (regKey.equals("hi")) {
-			return hi.getValue();
+	public byte[] getValue(String key) {
+		byte[] value; 
+		if (key.equals("hi")) {
+			value = hi.getValue();
+		} else if (key.equals("lo")){
+			value = lo.getValue();
 		} else {
-			return lo.getValue();
+			 value = internalRegs.get(key).getValue();
 		}
+		return value;
 	}
 	
-	public byte[] getValue(int regIndex) {
-		return dataRegs.get(regIndex).getValue();
+	
+	public byte[] getValue(int index) {
+		return dataRegs.get(index).getValue();
+	}
+	
+	
+	public void setValue(int index, byte[] value) {
+		if (index == 0) { 
+			return; 
+		}
+		dataRegs.get(index).setValue(value);
+	}
+	
+	
+	public void setValue(String key, byte[] value) {
+		if (key.equals("hi")) {
+			hi.setValue(value);
+		} else if (key.equals("lo")){
+			lo.setValue(value);
+		} else {
+			internalRegs.get(key).setValue(value);
+		}
 	}
 }
