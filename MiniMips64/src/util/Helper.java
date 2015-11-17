@@ -1,6 +1,5 @@
 package util;
 import java.math.BigInteger;
-import java.util.ArrayList;
 
 
 public class Helper {
@@ -12,8 +11,18 @@ public class Helper {
 	}
 	
 	
+	public static String IntToBinary(long number){
+		return Long.toBinaryString(number);
+	}
+	
+	
 	public static String IntToBinary5(int number) {
 		return String.format("%05d", Integer.parseInt(IntToBinary(number)));
+	}
+	
+	
+	public static String IntToBinary16(long number) {
+		return String.format("%16d", Long.parseLong(IntToBinary(number)));
 	}
 	
 	
