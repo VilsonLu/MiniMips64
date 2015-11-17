@@ -2,25 +2,24 @@ package register;
 
 public class RegisterCell {
 	private final int BITS = 64;
-	private byte[] value;
+	private long value;
 	
 	
 	RegisterCell() {
-		value = new byte[BITS];
 	}
 	
 	
 	void clear() {
-		value = new byte[BITS];
+		value = 0;
 	}
 	
 	
-	byte[] getValue() {
+	long getValue() {
 		return value;
 	}
 	
 	
-	void setValue(byte[] value) {
+	void setValue(long value) {
 		this.value = value;
 	}
 }

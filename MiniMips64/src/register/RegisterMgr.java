@@ -44,8 +44,8 @@ public class RegisterMgr {
 	}
 	
 	
-	public byte[] getValue(String key) {
-		byte[] value; 
+	public long getValue(String key) {
+		long value; 
 		if (key.equals("hi")) {
 			value = hi.getValue();
 		} else if (key.equals("lo")){
@@ -57,12 +57,12 @@ public class RegisterMgr {
 	}
 	
 	
-	public byte[] getValue(int index) {
+	public long getValue(int index) {
 		return dataRegs.get(index).getValue();
 	}
 	
 	
-	public void setValue(int index, byte[] value) {
+	public void setValue(int index, long value) {
 		if (index == 0) { 
 			return; 
 		}
@@ -70,7 +70,7 @@ public class RegisterMgr {
 	}
 	
 	
-	public void setValue(String key, byte[] value) {
+	public void setValue(String key, long value) {
 		if (key.equals("hi")) {
 			hi.setValue(value);
 		} else if (key.equals("lo")){
@@ -78,5 +78,11 @@ public class RegisterMgr {
 		} else {
 			internalRegs.get(key).setValue(value);
 		}
+	}
+	
+	
+	public void incrementPC() {
+		RegisterCell pc = internalRegs.get("PC");
+		pc.getValue();
 	}
 }
