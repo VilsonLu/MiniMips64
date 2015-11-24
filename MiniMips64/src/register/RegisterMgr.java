@@ -17,27 +17,31 @@ public class RegisterMgr {
 		return instance;
 	}
 	
-	
 	private final int TOTAL_REGS = 32;
 	private List<RegisterCell> dataRegs;
 	private RegisterCell hi;
 	private RegisterCell lo;
 	private Map<String, RegisterCell> internalRegs;
+	private boolean exMemCodeIsBranch = false;
 	
-	private static final String IF_ID_IR = "IF//ID.IR";
-	private static final String IF_ID_NPC = "IF//ID.NPC";
-	private static final String PC = "PC";
-	private static final String ID_EX_IR = "ID//EX.IR";
-	private static final String ID_EX_A = "ID//EX.A";
-	private static final String ID_EX_B = "ID//EX.B";
-	private static final String ID_EX_IMM = "ID//EX.IMM";
-	private static final String EX_MEM_IR = "EX//MEM.IR";
-	private static final String EX_MEM_ALUOUTPUT = "EX//MEM.ALUOUTPUT";
-	private static final String EX_MEM_B = "EX//MEM.B";
-	private static final String EX_MEM_COND = "EX//MEM.COND";
-	private static final String EX_MEM_WB = "MEM//WB.IR";
-	private static final String MEM_WB_ALUOUTPUT = "MEM//WB.ALUOUTPUT";
-	private static final String MEM_WB_LMD = "MEM//WB.LMD";	
+	public static final String IF_ID_IR = "IF//ID.IR";
+	public static final String IF_ID_NPC = "IF//ID.NPC";
+	public static final String PC = "PC";
+	
+	public static final String ID_EX_IR = "ID//EX.IR";
+	public static final String ID_EX_A = "ID//EX.A";
+	public static final String ID_EX_B = "ID//EX.B";
+	public static final String ID_EX_IMM = "ID//EX.IMM";
+	public static final String ID_EX_NPC = "ID//EX.NPC";
+	
+	public static final String EX_MEM_IR = "EX//MEM.IR";
+	public static final String EX_MEM_ALUOUTPUT = "EX//MEM.ALUOUTPUT";
+	public static final String EX_MEM_B = "EX//MEM.B";
+	public static final String EX_MEM_COND = "EX//MEM.COND";
+	public static final String EX_MEM_WB = "MEM//WB.IR";
+	
+	public static final String MEM_WB_ALUOUTPUT = "MEM//WB.ALUOUTPUT";
+	public static final String MEM_WB_LMD = "MEM//WB.LMD";	
 	
 	
 	private RegisterMgr() {
@@ -58,6 +62,7 @@ public class RegisterMgr {
 		internalRegs.put(ID_EX_A, new RegisterCell());
 		internalRegs.put(ID_EX_B, new RegisterCell());
 		internalRegs.put(ID_EX_IMM, new RegisterCell());
+		internalRegs.put(ID_EX_NPC, new RegisterCell());
 		
 		internalRegs.put(EX_MEM_IR, new RegisterCell());
 		internalRegs.put(EX_MEM_ALUOUTPUT, new RegisterCell());
@@ -118,7 +123,17 @@ public class RegisterMgr {
 	}
 	
 	
-	public long getConvertedPC() {
+	public long getPCindex() {
 		return this.getPc() / 4;
+	}
+	
+	
+	public boolean exMemCodeIsBranch() {
+		return exMemCodeIsBranch;
+	}
+	
+	
+	public void setExMemCodeIsBranch(boolean value) {
+		exMemCodeIsBranch = value;
 	}
 }

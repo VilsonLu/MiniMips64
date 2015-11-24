@@ -42,26 +42,6 @@ public class Rtype extends Opcode {
 	}
 	
 	
-	public int getRs() { 
-		return rs; 
-	}
-
-	
-	public void setRs(String rs) { 
-		this.rs = Integer.parseInt(rs); 
-	}
-
-	
-	public int getRt() { 
-		return rt;	
-	}
-
-	
-	public void setRt(String rt) { 
-		this.rt = Integer.parseInt(rt); 
-	}
-
-	
 	public int getRd() { 
 		return rd; 
 	}
