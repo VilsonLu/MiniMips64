@@ -13,6 +13,20 @@ public class RegisterMgr {
 	private RegisterCell lo;
 	private Map<String, RegisterCell> internalRegs;
 	
+	private static final String IF_ID_IR = "IF//ID.IR";
+	private static final String IF_ID_NPC = "IF//ID.NPC";
+	private static final String PC = "PC";
+	private static final String ID_EX_IR = "ID//EX.IR";
+	private static final String ID_EX_A = "ID//EX.A";
+	private static final String ID_EX_B = "ID//EX.B";
+	private static final String ID_EX_IMM = "ID//EX.IMM";
+	private static final String EX_MEM_IR = "EX//MEM.IR";
+	private static final String EX_MEM_ALUOUTPUT = "EX//MEM.ALUOUTPUT";
+	private static final String EX_MEM_B = "EX//MEM.B";
+	private static final String EX_MEM_COND = "EX//MEM.COND";
+	private static final String EX_MEM_WB = "MEM//WB.IR";
+	private static final String MEM_WB_ALUOUTPUT = "MEM//WB.ALUOUTPUT";
+	private static final String MEM_WB_LMD = "MEM//WB.LMD";	
 	
 	public RegisterMgr() {
 		dataRegs = new ArrayList<>();
@@ -24,23 +38,23 @@ public class RegisterMgr {
 		
 		internalRegs = new LinkedHashMap<>();
 		
-		internalRegs.put("IF//ID.IR", new RegisterCell());
-		internalRegs.put("IF//ID.NPC", new RegisterCell());
-		internalRegs.put("PC", new RegisterCell());
+		internalRegs.put(IF_ID_IR, new RegisterCell());
+		internalRegs.put(IF_ID_NPC, new RegisterCell());
+		internalRegs.put(PC, new RegisterCell());
 		
-		internalRegs.put("ID//EX.IR", new RegisterCell());
-		internalRegs.put("ID//EX.A", new RegisterCell());
-		internalRegs.put("ID//EX.B", new RegisterCell());
-		internalRegs.put("ID//EX.IMM", new RegisterCell());
+		internalRegs.put(ID_EX_IR, new RegisterCell());
+		internalRegs.put(ID_EX_A, new RegisterCell());
+		internalRegs.put(ID_EX_B, new RegisterCell());
+		internalRegs.put(ID_EX_IMM, new RegisterCell());
 		
-		internalRegs.put("EX//MEM.IR", new RegisterCell());
-		internalRegs.put("EX//MEM.ALUOUTPUT", new RegisterCell());
-		internalRegs.put("EX//MEM.B", new RegisterCell());
-		internalRegs.put("EX//MEM.COND", new RegisterCell());
+		internalRegs.put(EX_MEM_IR, new RegisterCell());
+		internalRegs.put(EX_MEM_ALUOUTPUT, new RegisterCell());
+		internalRegs.put(EX_MEM_B, new RegisterCell());
+		internalRegs.put(EX_MEM_COND, new RegisterCell());
+		internalRegs.put(EX_MEM_WB, new RegisterCell());
 		
-		internalRegs.put("MEM//WB.IR", new RegisterCell());
-		internalRegs.put("MEM//WB.ALUOUTPUT", new RegisterCell());
-		internalRegs.put("MEM//WB.LMD", new RegisterCell());
+		internalRegs.put(MEM_WB_ALUOUTPUT, new RegisterCell());
+		internalRegs.put(MEM_WB_LMD, new RegisterCell());
 	}
 	
 	
@@ -81,8 +95,18 @@ public class RegisterMgr {
 	}
 	
 	
-	public void incrementPC() {
-		RegisterCell pc = internalRegs.get("PC");
-		pc.getValue();
+	public void incrementPc() {
+		RegisterCell pc = internalRegs.get(PC);
+		pc.setValue(pc.getValue() + 4);
+	}
+	
+	
+	public long getPc() {
+		return internalRegs.get(PC).getValue();
+	}
+	
+	
+	public long getConvertedPC() {
+		return this.getPc() / 4;
 	}
 }

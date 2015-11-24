@@ -4,6 +4,8 @@ package instruction;
 public abstract class Instruction {
 	private final String stringOpcode;
 	private final int opcode;
+	private int order;
+	
 	public abstract String getStringCode();
 	public abstract String getBinaryCode();
 	public abstract void execute();
@@ -24,6 +26,14 @@ public abstract class Instruction {
 		return opcode;
 	}
 	
+	
+	public int getOrder() {
+		return order;
+	}
+	
+	public void setOrder(int order) {
+		this.order = order;
+	}
 	
 	@Override
 	public String toString() {

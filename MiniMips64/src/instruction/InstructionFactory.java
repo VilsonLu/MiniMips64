@@ -9,7 +9,6 @@ import util.MipsExceptionList;
 
 public class InstructionFactory {
 	
-	
 	public Instruction getInstruction(String line) throws MipsException, MipsExceptionList {
 		line = line.trim();
 		String[] splitLine = line.split(" ", 2);
