@@ -1,6 +1,6 @@
-package instruction.itype;
+package instruction.branch;
 
-import instruction.BranchInstruction;
+import instruction.opcode.Itype;
 
 public class Beq extends BranchInstruction {
 	private Itype opcode;

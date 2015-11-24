@@ -1,9 +1,9 @@
-import instruction.AluInstruction;
 import instruction.Instruction;
-import instruction.rtype.Daddu;
-import instruction.rtype.Dmult;
-import instruction.rtype.Or;
-import instruction.rtype.Rtype;
+import instruction.alu.AluInstruction;
+import instruction.alu.Daddu;
+import instruction.alu.Dmult;
+import instruction.alu.Or;
+import instruction.opcode.Rtype;
 import util.Helper;
 
 public class Driver {

@@ -1,6 +1,5 @@
-package instruction.itype;
+package instruction.opcode;
 
-import instruction.opcode.Opcode;
 import util.Helper;
 
 public class Itype extends Opcode {
@@ -14,7 +13,7 @@ public class Itype extends Opcode {
 	}
 	
 	
-	protected String getStringCode2regOffset() {
+	public String getStringCode2regOffset() {
 		StringBuilder code = new StringBuilder(this.getStringInstruction());
 		code.append(" r");
 		code.append(this.getRs());
@@ -26,7 +25,7 @@ public class Itype extends Opcode {
 	}
 	
 	
-	protected String getStringCodeRegOffsetReg() {
+	public String getStringCodeRegOffsetReg() {
 		StringBuilder code = new StringBuilder(this.getStringInstruction());
 		code.append(" r");
 		code.append(this.getRt());
@@ -50,7 +49,7 @@ public class Itype extends Opcode {
 	}
 
 	
-	protected void setRs(String rs) { 
+	public void setRs(String rs) { 
 		this.rs = Integer.parseInt(rs); 
 	}
 
@@ -60,7 +59,7 @@ public class Itype extends Opcode {
 	}
 
 	
-	protected void setRt(String rt) { 
+	public void setRt(String rt) { 
 		this.rt = Integer.parseInt(rt); 
 	}
 

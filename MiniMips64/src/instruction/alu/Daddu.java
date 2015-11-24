@@ -1,6 +1,6 @@
-package instruction.rtype;
+package instruction.alu;
 
-import instruction.AluInstruction;
+import instruction.opcode.Rtype;
 
 public class Daddu extends AluInstruction {
 	private Rtype opcode;

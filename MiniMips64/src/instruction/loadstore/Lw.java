@@ -1,6 +1,6 @@
-package instruction.itype;
+package instruction.loadstore;
 
-import instruction.LoadStoreInstruction;
+import instruction.opcode.Itype;
 
 public class Lw extends LoadStoreInstruction {
 	private Itype opcode; 

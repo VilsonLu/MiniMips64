@@ -1,6 +1,5 @@
-package instruction.rtype;
+package instruction.opcode;
 
-import instruction.opcode.Opcode;
 import util.Helper;
 
 public class Rtype extends Opcode {
@@ -10,7 +9,7 @@ public class Rtype extends Opcode {
 	private int func;
 	
 	
-	Rtype(String stringOpcode, int func) {
+	public Rtype(String stringOpcode, int func) {
 		super(stringOpcode, 0);
 		this.func = func;
 	}
@@ -21,7 +20,7 @@ public class Rtype extends Opcode {
 				+ Helper.IntToBinary5(rd) + Helper.IntToBinary5(0) + Helper.IntToBinary6(func);
 	}
 
-	protected String getStringCode2regs() {
+	public String getStringCode2regs() {
 		StringBuilder code = new StringBuilder(this.getStringInstruction());
 		code.append(" r");
 		code.append(this.getRs());
@@ -31,7 +30,7 @@ public class Rtype extends Opcode {
 	}
 	
 	
-	protected String getStringCode3regs() {
+	public String getStringCode3regs() {
 		StringBuilder code = new StringBuilder(this.getStringInstruction());
 		code.append(" r");
 		code.append(this.getRd());
@@ -48,7 +47,7 @@ public class Rtype extends Opcode {
 	}
 
 	
-	protected void setRs(String rs) { 
+	public void setRs(String rs) { 
 		this.rs = Integer.parseInt(rs); 
 	}
 
@@ -58,7 +57,7 @@ public class Rtype extends Opcode {
 	}
 
 	
-	protected void setRt(String rt) { 
+	public void setRt(String rt) { 
 		this.rt = Integer.parseInt(rt); 
 	}
 
@@ -68,7 +67,7 @@ public class Rtype extends Opcode {
 	}
 
 	
-	protected void setRd(String rd) { 
+	public void setRd(String rd) { 
 		this.rd = Integer.parseInt(rd); 
 	}
 

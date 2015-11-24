@@ -1,10 +1,10 @@
 package instruction;
 
 import util.MipsException;
-import instruction.itype.Beq;
-import instruction.rtype.Daddu;
-import instruction.rtype.Dmult;
-import instruction.rtype.Or;
+import instruction.alu.Daddu;
+import instruction.alu.Dmult;
+import instruction.alu.Or;
+import instruction.branch.Beq;
 import util.MipsExceptionList;
 
 public class InstructionFactory {
