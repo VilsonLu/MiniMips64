@@ -1,25 +1,22 @@
 package instruction.rtype;
 
-public class Or extends Rtype {
+import instruction.AluInstruction;
+
+public class Or extends AluInstruction {
+	private Rtype opcode;
 	
 	public Or(String registerString) {
-		super("OR", 37);
+		super();
+		opcode = new Rtype("OR", 37);
+		this.setOpcode(opcode);
 		String registers[] = registerString.split(","); // rd, rs, rt
-		this.setRd(registers[0]);
-		this.setRs(registers[1]);
-		this.setRt(registers[2]);
+		opcode.setRd(registers[0]);
+		opcode.setRs(registers[1]);
+		opcode.setRt(registers[2]);
 	}
 
-	
 	@Override
 	public String getStringCode() {
-		return this.getStringCode3regs();
+		return opcode.getStringCode3regs();
 	}
-
-	@Override
-	public void execute() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

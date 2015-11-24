@@ -1,9 +1,9 @@
 package instruction.rtype;
 
-import instruction.Instruction;
+import instruction.opcode.Opcode;
 import util.Helper;
 
-public abstract class Rtype extends Instruction {
+public class Rtype extends Opcode {
 	private int rs;
 	private int rt;
 	private int rd;
@@ -17,12 +17,12 @@ public abstract class Rtype extends Instruction {
 	
 	
 	public String getBinaryCode() {
-		return Helper.IntToBinary6(this.getOpcode()) + Helper.IntToBinary5(rs) + Helper.IntToBinary5(rt)
+		return Helper.IntToBinary6(this.getNumCode()) + Helper.IntToBinary5(rs) + Helper.IntToBinary5(rt)
 				+ Helper.IntToBinary5(rd) + Helper.IntToBinary5(0) + Helper.IntToBinary6(func);
 	}
 
 	protected String getStringCode2regs() {
-		StringBuilder code = new StringBuilder(this.getStringOpcode());
+		StringBuilder code = new StringBuilder(this.getStringInstruction());
 		code.append(" r");
 		code.append(this.getRs());
 		code.append(", r");
@@ -32,7 +32,7 @@ public abstract class Rtype extends Instruction {
 	
 	
 	protected String getStringCode3regs() {
-		StringBuilder code = new StringBuilder(this.getStringOpcode());
+		StringBuilder code = new StringBuilder(this.getStringInstruction());
 		code.append(" r");
 		code.append(this.getRd());
 		code.append(", r");

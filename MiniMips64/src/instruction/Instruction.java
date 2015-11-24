@@ -1,31 +1,51 @@
 package instruction;
 
+import instruction.opcode.Opcode;
 
 public abstract class Instruction {
-	private final String stringOpcode;
-	private final int opcode;
+	private Opcode opcode;
+	
 	private int order;
 	
+	
+	protected Instruction() {
+	}
+	
+	
 	public abstract String getStringCode();
-	public abstract String getBinaryCode();
-	public abstract void execute();
+
+	public String getBinaryCode() {
+		return opcode.getBinaryCode();
+	}
 	
-	
-	protected Instruction(String stringOpcode, int opcode) {
-		this.stringOpcode = stringOpcode;
+	protected final void setOpcode(Opcode opcode) {
 		this.opcode = opcode;
 	}
 	
+	public void ife() {
+		
+	}
 	
-	protected String getStringOpcode() {
-		return stringOpcode;
+	public void id() {
+		
+	}
+	
+	
+	public void ex() {
+		
+	}
+	
+	
+	public void mem() {
+		
+	}
+	
+	
+	public void wb() {
+		
 	}
 	
 
-	protected int getOpcode() {
-		return opcode;
-	}
-	
 	
 	public int getOrder() {
 		return order;

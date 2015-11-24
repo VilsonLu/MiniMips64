@@ -1,23 +1,23 @@
 package instruction.rtype;
 
-public class Dmult extends Rtype {
+import instruction.AluInstruction;
 
+public class Dmult extends AluInstruction {
+	private Rtype opcode;
+	
 	public Dmult(String registerString) {
-		super("DMULT", 28);
+		super();
+		opcode = new Rtype("DMULT", 28);
+		this.setOpcode(opcode);
+		
 		String registers[] = registerString.split(","); // rs, rt
-		this.setRs(registers[0]);
-		this.setRt(registers[1]);
+		opcode.setRs(registers[0]);
+		opcode.setRt(registers[1]);
+		
 	}
 
 	@Override
 	public String getStringCode() {
-		return this.getStringCode2regs();
+		return opcode.getStringCode2regs();
 	}
-
-	@Override
-	public void execute() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

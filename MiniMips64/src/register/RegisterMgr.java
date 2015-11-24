@@ -7,6 +7,17 @@ import java.util.Map;
 
 
 public class RegisterMgr {
+	private static RegisterMgr instance;
+	
+	static {
+		instance = new RegisterMgr();
+	}
+	
+	public static RegisterMgr getInstance() {
+		return instance;
+	}
+	
+	
 	private final int TOTAL_REGS = 32;
 	private List<RegisterCell> dataRegs;
 	private RegisterCell hi;
@@ -28,7 +39,8 @@ public class RegisterMgr {
 	private static final String MEM_WB_ALUOUTPUT = "MEM//WB.ALUOUTPUT";
 	private static final String MEM_WB_LMD = "MEM//WB.LMD";	
 	
-	public RegisterMgr() {
+	
+	private RegisterMgr() {
 		dataRegs = new ArrayList<>();
 		for (int i = 0; i < TOTAL_REGS; i++) {
 			dataRegs.add(new RegisterCell());

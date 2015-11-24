@@ -1,25 +1,22 @@
 package instruction.itype;
 
-public class Lw extends Itype {
-	
+import instruction.LoadStoreInstruction;
+
+public class Lw extends LoadStoreInstruction {
+	private Itype opcode; 
 	public Lw(String registerString) {
-		super("LW", 35);
+		super();
+		opcode = new Itype("LW", 35);
+		this.setOpcode(opcode);
 		String registers[] = registerString.split(","); // rd, offset, rs
-		this.setRt(registers[0]);
-		this.setImm(registers[1]);
-		this.setRs(registers[2]);
+		opcode.setRt(registers[0]);
+		opcode.setImm(registers[1]);
+		opcode.setRs(registers[2]);
 	}
 
 	
 	@Override
 	public String getStringCode() {
-		return this.getStringCodeRegOffsetReg();
+		return opcode.getStringCodeRegOffsetReg();
 	}
-
-
-	@Override
-	public void execute() {
-	}
-
-	
 }

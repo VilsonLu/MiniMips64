@@ -1,3 +1,4 @@
+import instruction.AluInstruction;
 import instruction.Instruction;
 import instruction.rtype.Daddu;
 import instruction.rtype.Dmult;
@@ -27,7 +28,7 @@ public class Driver {
 	}
 	
 	void testOr() {
-		Rtype dmult = new Or("1,2,3");
+		AluInstruction dmult = new Or("1,2,3");
 		System.out.println(dmult.getStringCode());
 		System.out.println(dmult.getBinaryCode());
 		try {

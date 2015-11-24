@@ -1,25 +1,25 @@
 package instruction.itype;
 
-public class Beq extends Itype {
+import instruction.BranchInstruction;
+
+public class Beq extends BranchInstruction {
+	private Itype opcode;
 	
 	public Beq(String registerString) {
-		super("BEQ", 4);
+		super();
+		opcode = new Itype("BEQ", 4);
+		this.setOpcode(opcode);
 		String registers[] = registerString.split(","); // rs, rt, offset
-		this.setRs(registers[0]);
-		
+		opcode.setRs(registers[0]);
+		opcode.setRt(registers[1]);
+		opcode.setImm(registers[2]);
 	}
 	
 	
 	@Override
 	public String getStringCode() {
-		return this.getStringCode2regOffset();
+		return opcode.getStringCode2regOffset();
 	}
 
 	
-	@Override
-	public void execute() {
-		// TODO Auto-generated method stub
-
-	}
-
 }

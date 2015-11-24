@@ -1,22 +1,21 @@
 package instruction.itype;
 
-import instruction.Instruction;
+import instruction.opcode.Opcode;
 import util.Helper;
 
-public abstract class Itype extends Instruction {
+public class Itype extends Opcode {
 	private int rs;
 	private int rt;
 	private long imm;
 	
 	
-	Itype(String stringOpcode, int opcode) {
+	public Itype(String stringOpcode, int opcode) {
 		super(stringOpcode, opcode);
-		
 	}
 	
 	
 	protected String getStringCode2regOffset() {
-		StringBuilder code = new StringBuilder(this.getStringOpcode());
+		StringBuilder code = new StringBuilder(this.getStringInstruction());
 		code.append(" r");
 		code.append(this.getRs());
 		code.append(", r");
@@ -28,7 +27,7 @@ public abstract class Itype extends Instruction {
 	
 	
 	protected String getStringCodeRegOffsetReg() {
-		StringBuilder code = new StringBuilder(this.getStringOpcode());
+		StringBuilder code = new StringBuilder(this.getStringInstruction());
 		code.append(" r");
 		code.append(this.getRt());
 		code.append(", ");
@@ -41,7 +40,7 @@ public abstract class Itype extends Instruction {
 	
 	
 	public String getBinaryCode() {
-		return Helper.IntToBinary6(this.getOpcode()) + Helper.IntToBinary5(rs) 
+		return Helper.IntToBinary6(this.getNumCode()) + Helper.IntToBinary5(rs) 
 			+ Helper.IntToBinary5(rt) + Helper.IntToBinary16(imm);
 	}
 
