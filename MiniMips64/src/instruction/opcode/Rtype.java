@@ -48,7 +48,7 @@ public class Rtype extends Opcode {
 
 	
 	public void setRd(String rd) { 
-		this.rd = Integer.parseInt(rd); 
+		this.rd = Integer.parseInt(rd);
 	}
 
 	

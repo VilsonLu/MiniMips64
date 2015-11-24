@@ -6,7 +6,7 @@ public abstract class Opcode {
 	
 	private int rs;
 	private int rt;
-	
+	private int destination;
 	
 	public abstract String getBinaryCode();
 	
@@ -41,6 +41,16 @@ public abstract class Opcode {
 	
 	public void setRt(String rt) { 
 		this.rt = Integer.parseInt(rt); 
+	}
+	
+	
+	public int getDestination() {
+		return destination;
+	}
+	
+	
+	public void setDestination(String destination) {
+		this.destination = Integer.parseInt(destination);
 	}
 	
 	

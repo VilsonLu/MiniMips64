@@ -2,9 +2,33 @@ package instruction.alu;
 
 import instruction.Instruction;
 import instruction.opcode.Opcode;
+import register.RegisterMgr;
 
 public abstract class AluInstruction extends Instruction {
 	public AluInstruction() {
 		super();
 	}
+	
+	public void ex() {
+		RegisterMgr regs = RegisterMgr.getInstance();
+		regs.setExMemCodeIsBranch(false);
+		regs.setValue(RegisterMgr.EX_MEM_COND, 0);
+		regs.setValue(RegisterMgr.EX_MEM_ALUOUTPUT, this.getExOperation());
+	}
+	
+	
+	public void mem() {
+		RegisterMgr regs = RegisterMgr.getInstance();
+		long ir = regs.getValue(RegisterMgr.EX_MEM_IR);
+		long aluoutput = regs.getValue(RegisterMgr.EX_MEM_ALUOUTPUT);
+		regs.setValue(RegisterMgr.MEM_WB_IR, ir);
+		regs.setValue(RegisterMgr.MEM_WB_ALUOUTPUT, aluoutput);
+	}
+	
+	
+	public void wb() {
+		
+	}
+	
+	abstract long getExOperation();
 }

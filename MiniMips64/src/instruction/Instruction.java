@@ -9,19 +9,20 @@ public abstract class Instruction {
 	private int order;
 	
 	
-	protected Instruction() {
-	}
 	
 	
 	public abstract String getStringCode();
 
+	
 	public String getBinaryCode() {
 		return opcode.getBinaryCode();
 	}
 	
+	
 	protected final void setOpcode(Opcode opcode) {
 		this.opcode = opcode;
 	}
+	
 	
 	public void ife() {
 		RegisterMgr regs = RegisterMgr.getInstance();
@@ -38,6 +39,7 @@ public abstract class Instruction {
 		regs.setValue(RegisterMgr.PC, npcValue);
 	}
 	
+	
 	public void id() {
 		RegisterMgr regs = RegisterMgr.getInstance();
 		long a = regs.getValue(opcode.getRs());
@@ -53,20 +55,15 @@ public abstract class Instruction {
 		regs.setValue(RegisterMgr.ID_EX_NPC, npc);
 	}
 	
-	/*
 	public abstract void ex();
-	
-	
 	public abstract void mem();
-	
-	
 	public abstract void wb();
-	*/
-
+	
 	
 	public int getOrder() {
 		return order;
 	}
+	
 	
 	public void setOrder(int order) {
 		this.order = order;

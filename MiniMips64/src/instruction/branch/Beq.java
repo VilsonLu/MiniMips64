@@ -1,6 +1,7 @@
 package instruction.branch;
 
 import instruction.opcode.Itype;
+import register.RegisterMgr;
 
 public class Beq extends BranchInstruction {
 	private Itype opcode;
@@ -19,6 +20,15 @@ public class Beq extends BranchInstruction {
 	@Override
 	public String getStringCode() {
 		return opcode.getStringCode2regOffset();
+	}
+
+
+	@Override
+	long getExOperation() {
+		RegisterMgr regs = RegisterMgr.getInstance();
+		long a = regs.getValue(RegisterMgr.ID_EX_A);
+		long b = regs.getValue(RegisterMgr.ID_EX_B);
+		return a == b ? 1 : 0;
 	}
 
 	
