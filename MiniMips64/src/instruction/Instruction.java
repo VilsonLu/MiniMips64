@@ -5,11 +5,7 @@ import register.RegisterMgr;
 
 public abstract class Instruction {
 	private Opcode opcode;
-	
 	private int order;
-	
-	
-	
 	
 	public abstract String getStringCode();
 
@@ -21,6 +17,11 @@ public abstract class Instruction {
 	
 	protected final void setOpcode(Opcode opcode) {
 		this.opcode = opcode;
+	}
+	
+	
+	protected Opcode getOpcode() {
+		return opcode;
 	}
 	
 	

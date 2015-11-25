@@ -15,7 +15,6 @@ public class Lw extends LoadStoreInstruction {
 		opcode.setRs(registers[2]);
 		opcode.setDestination(registers[0]);
 	}
-
 	
 	
 	@Override
@@ -24,11 +23,11 @@ public class Lw extends LoadStoreInstruction {
 	}
 
 
-
 	@Override
 	public void mem() {
 		// TODO get value from Memory
 	}
+
 	
 	@Override
 	public void wb() {

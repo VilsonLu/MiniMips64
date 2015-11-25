@@ -5,9 +5,14 @@ import instruction.opcode.Opcode;
 import register.RegisterMgr;
 
 public abstract class AluInstruction extends Instruction {
+	
+	abstract long getExOperation();
+	
+	
 	public AluInstruction() {
 		super();
 	}
+	
 	
 	public void ex() {
 		RegisterMgr regs = RegisterMgr.getInstance();
@@ -27,8 +32,8 @@ public abstract class AluInstruction extends Instruction {
 	
 	
 	public void wb() {
-		
+		RegisterMgr regs = RegisterMgr.getInstance();
+		long aluoutput = regs.getValue(RegisterMgr.MEM_WB_ALUOUTPUT);
+		regs.setValue(this.getOpcode().getDestination(), aluoutput);	
 	}
-	
-	abstract long getExOperation();
 }
