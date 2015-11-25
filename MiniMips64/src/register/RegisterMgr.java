@@ -7,15 +7,13 @@ import java.util.Map;
 
 
 public class RegisterMgr {
-	private static RegisterMgr instance;
+	private static RegisterMgr instance = new RegisterMgr();
 	
-	static {
-		instance = new RegisterMgr();
-	}
 	
 	public static RegisterMgr getInstance() {
 		return instance;
 	}
+	
 	
 	private final int TOTAL_REGS = 32;
 	private List<RegisterCell> dataRegs;

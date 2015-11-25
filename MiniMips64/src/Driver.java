@@ -17,8 +17,9 @@ public class Driver {
 			// new Driver().testOr();
 			// new Driver().testMult();
 			// new Driver().testHelper();
-			new Driver().testImm();
+//			new Driver().testImm();
 //			new Driver().testSignExtend();
+			new Driver().testMemory();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -52,5 +53,18 @@ public class Driver {
 	void testSignExtend() {
 		long binary = 0x80;
 		System.out.println(Long.toBinaryString(binary));
+	}
+	
+	void testMemory() {
+		byte[] mem = new byte[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+		long value = 0;
+		for (int i = 0; i < 8; i++) {
+			byte ret = mem[i];
+			
+			long converted = ret << (i*4) & 0xFFFF_FFFFL;
+			System.out.println(Long.toHexString(converted));
+			value = value + converted;
+		}
+		System.out.println(Long.toHexString(value));
 	}
 }

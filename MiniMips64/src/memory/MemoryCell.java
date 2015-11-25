@@ -1,7 +1,7 @@
 package memory;
 
 public class MemoryCell {
-	static final int BYTES = 4;
+	public static final int BYTES = 4;
 	private byte[] values;
 	
 	

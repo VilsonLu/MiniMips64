@@ -4,6 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemoryMgr {
+	private static MemoryMgr instance = new MemoryMgr();
+	
+	
+	public static MemoryMgr getInstance() {
+		return instance;
+	}
+	
+	
 	private final int DATA_SEGMENT_START = 0x2000;
 	private final int DATA_SEGMENT_END = 0x3fff;
 	private List<MemoryCell> codeSegment;
@@ -35,23 +43,24 @@ public class MemoryMgr {
 	}
 	
 	
-	public byte get(int location) {
+	public byte get(long location) {
 		List<MemoryCell> segment = dataSegment;
 		if (location < DATA_SEGMENT_START) {
 			segment = codeSegment;
 		}
-		MemoryCell cell = segment.get(location / MemoryCell.BYTES);
-		return cell.getByte(location % MemoryCell.BYTES);
+		MemoryCell cell = segment.get((int) location / MemoryCell.BYTES);
+		return cell.getByte((int) location % MemoryCell.BYTES);
 	}
 	
 	
-	public void set(int location, byte value) {
+	public void set(long location, byte value) {
 		List<MemoryCell> segment = dataSegment;
 		
 		if (location < DATA_SEGMENT_START) {
 			segment = codeSegment;
 		}
-		MemoryCell cell = segment.get(location / MemoryCell.BYTES);
-		cell.setByte(value, location % MemoryCell.BYTES);
+		
+		MemoryCell cell = segment.get((int) location / MemoryCell.BYTES);
+		cell.setByte(value, (int) location % MemoryCell.BYTES);
 	}
 }

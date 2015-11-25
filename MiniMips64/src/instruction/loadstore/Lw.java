@@ -1,6 +1,7 @@
 package instruction.loadstore;
 
 import instruction.opcode.Itype;
+import memory.MemoryMgr;
 import register.RegisterMgr;
 
 public class Lw extends LoadStoreInstruction {
@@ -26,6 +27,16 @@ public class Lw extends LoadStoreInstruction {
 	@Override
 	public void mem() {
 		// TODO get value from Memory
+		MemoryMgr mems = MemoryMgr.getInstance();
+		RegisterMgr regs = RegisterMgr.getInstance();
+		long location = regs.getValue(RegisterMgr.EX_MEM_ALUOUTPUT);
+		long lmd = 0;
+		for (int i = 0; i < 8; i++) {
+			byte value = mems.get(location + i);
+			long converted = value << (i*4) & 0xFFFF_FFFFL;
+			lmd = lmd + converted;
+		}
+		regs.setValue(RegisterMgr.MEM_WB_LMD, lmd);
 	}
 
 	
