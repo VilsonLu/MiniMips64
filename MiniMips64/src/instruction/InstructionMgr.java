@@ -11,16 +11,16 @@ import java.util.List;
  */
 
 public class InstructionMgr {
-	private static InstructionFactory instance;
+	private static InstructionMgr instance;
 	private List<Line> lines;
 	
 	
 	static {
-		instance = new InstructionFactory();
+		instance = new InstructionMgr();
 	}
 
 	
-	public static InstructionFactory getInstance() {
+	public static InstructionMgr getInstance() {
 		return instance;
 	}
 	
@@ -29,7 +29,11 @@ public class InstructionMgr {
 		lines = new ArrayList<>();
 	}
 	
-	
+	/**
+	 * 
+	 * @param index  This is the index, not the address.
+	 * @return
+	 */
 	public Instruction getInstruction(int index) {
 		return lines.get(index).getInstruction();
 	}

@@ -3,6 +3,8 @@ package pipeline;
 import java.util.List;
 
 import instruction.Instruction;
+import instruction.InstructionMgr;
+import register.RegisterMgr;
 
 public class Pipeline {
 	private final int FP_ADD_CYCLES = 4;
@@ -25,7 +27,13 @@ public class Pipeline {
 		ife = this.getNextInstruction(); 
 	}
 	
+	
 	private Instruction getNextInstruction() {
+		RegisterMgr regs = RegisterMgr.getInstance();
+		long pc = regs.getPc();
+		InstructionMgr instructions = InstructionMgr.getInstance();
+		instructions.getInstruction((int) pc / 4);
+		
 		return null;
 	}
 }
