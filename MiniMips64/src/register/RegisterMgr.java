@@ -7,8 +7,6 @@ import java.util.Map;
 
 
 public class RegisterMgr {
-<<<<<<< HEAD
-=======
 	private static RegisterMgr instance;
 	
 	static {
@@ -19,17 +17,11 @@ public class RegisterMgr {
 		return instance;
 	}
 	
->>>>>>> pipeline
 	private final int TOTAL_REGS = 32;
 	private List<RegisterCell> dataRegs;
 	private RegisterCell hi;
 	private RegisterCell lo;
 	private Map<String, RegisterCell> internalRegs;
-<<<<<<< HEAD
-	
-	
-	public RegisterMgr() {
-=======
 	private boolean exMemCodeIsBranch = false;
 	
 	public static final String IF_ID_IR = "IF//ID.IR";
@@ -55,7 +47,6 @@ public class RegisterMgr {
 	
 	
 	private RegisterMgr() {
->>>>>>> pipeline
 		dataRegs = new ArrayList<>();
 		for (int i = 0; i < TOTAL_REGS; i++) {
 			dataRegs.add(new RegisterCell());
@@ -65,30 +56,6 @@ public class RegisterMgr {
 		
 		internalRegs = new LinkedHashMap<>();
 		
-<<<<<<< HEAD
-		internalRegs.put("IF//ID.IR", new RegisterCell());
-		internalRegs.put("IF//ID.NPC", new RegisterCell());
-		internalRegs.put("PC", new RegisterCell());
-		
-		internalRegs.put("ID//EX.IR", new RegisterCell());
-		internalRegs.put("ID//EX.A", new RegisterCell());
-		internalRegs.put("ID//EX.B", new RegisterCell());
-		internalRegs.put("ID//EX.IMM", new RegisterCell());
-		
-		internalRegs.put("EX//MEM.IR", new RegisterCell());
-		internalRegs.put("EX//MEM.ALUOUTPUT", new RegisterCell());
-		internalRegs.put("EX//MEM.B", new RegisterCell());
-		internalRegs.put("EX//MEM.COND", new RegisterCell());
-		
-		internalRegs.put("MEM//WB.IR", new RegisterCell());
-		internalRegs.put("MEM//WB.ALUOUTPUT", new RegisterCell());
-		internalRegs.put("MEM//WB.LMD", new RegisterCell());
-	}
-	
-	
-	public byte[] getValue(String key) {
-		byte[] value; 
-=======
 		internalRegs.put(IF_ID_IR, new RegisterCell());
 		internalRegs.put(IF_ID_NPC, new RegisterCell());
 		internalRegs.put(PC, new RegisterCell());
@@ -112,7 +79,6 @@ public class RegisterMgr {
 	
 	public long getValue(String key) {
 		long value; 
->>>>>>> pipeline
 		if (key.equals("hi")) {
 			value = hi.getValue();
 		} else if (key.equals("lo")){
@@ -124,20 +90,12 @@ public class RegisterMgr {
 	}
 	
 	
-<<<<<<< HEAD
-	public byte[] getValue(int index) {
-=======
 	public long getValue(int index) {
->>>>>>> pipeline
 		return dataRegs.get(index).getValue();
 	}
 	
 	
-<<<<<<< HEAD
-	public void setValue(int index, byte[] value) {
-=======
 	public void setValue(int index, long value) {
->>>>>>> pipeline
 		if (index == 0) { 
 			return; 
 		}
@@ -145,11 +103,7 @@ public class RegisterMgr {
 	}
 	
 	
-<<<<<<< HEAD
-	public void setValue(String key, byte[] value) {
-=======
 	public void setValue(String key, long value) {
->>>>>>> pipeline
 		if (key.equals("hi")) {
 			hi.setValue(value);
 		} else if (key.equals("lo")){
@@ -158,8 +112,6 @@ public class RegisterMgr {
 			internalRegs.get(key).setValue(value);
 		}
 	}
-<<<<<<< HEAD
-=======
 	
 	
 	public void incrementPc() {
@@ -186,5 +138,4 @@ public class RegisterMgr {
 	public void setExMemCodeIsBranch(boolean value) {
 		exMemCodeIsBranch = value;
 	}
->>>>>>> pipeline
 }
