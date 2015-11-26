@@ -10,9 +10,7 @@ import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
 
 public class InternalRegistersPanel extends JPanel {
-	/**
-	 * 
-	 */
+	/**/
 	private static final long serialVersionUID = 1L;
 	
 	private final int REG_LABEL_WIDTH = 30;
@@ -90,8 +88,7 @@ public class InternalRegistersPanel extends JPanel {
 		   if (i % 4 == 0 && i != 0) {
 			   result = result.append(' ');
 		   }
-		   result = result.append(str.charAt(i));
-		   
+		   result = result.append(str.charAt(i));   
 		}
 
 		return result.toString();

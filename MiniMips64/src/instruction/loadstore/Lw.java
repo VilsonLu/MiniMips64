@@ -31,7 +31,7 @@ public class Lw extends LoadStoreInstruction {
 		RegisterMgr regs = RegisterMgr.getInstance();
 		long location = regs.getValue(RegisterMgr.EX_MEM_ALUOUTPUT);
 		long lmd = 0;
-		for (int i = 0; i < 8; i++) {
+		for (int i = 0; i < 4; i++) {
 			byte value = mems.get(location + i);
 			long converted = value << (i*4) & 0xFFFF_FFFFL;
 			lmd = lmd + converted;
