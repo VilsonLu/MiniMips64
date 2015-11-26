@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 import api.instruction.Instruction;
 import api.instruction.InstructionMgr;
@@ -8,6 +9,7 @@ import api.instruction.alu.Or;
 import api.memory.MemoryMgr;
 import api.pipeline.Pipeline;
 import api.register.RegisterMgr;
+import ui.UiFacade;
 import util.Helper;
 
 public class Tests {
@@ -27,6 +29,7 @@ public class Tests {
 		}
 	}
 	
+	
 	void testPipeline() {
 		MemoryMgr mems = MemoryMgr.getInstance();
 		for (int i = 0; i < 20; i++) {
@@ -38,6 +41,11 @@ public class Tests {
 		regs.setValue(2, 5);
 		regs.setValue(3, 7);
 		
+		UiFacade ui = new UiFacade();
+		ui.setRegister(1, 3);
+		ui.setRegister(2, 5);
+		ui.setRegister(3, 7);
+		
 		Instruction a = new Daddu("4,1,2");
 		Instruction b = new Or("5,2,3");
 		ArrayList<Instruction> list = new ArrayList<>();
@@ -47,14 +55,18 @@ public class Tests {
 		InstructionMgr instructions = InstructionMgr.getInstance();
 		instructions.setInstructions(list);
 		
-		
 		System.out.println(regs.getValue(4));
 		
 		Pipeline pipeline = new Pipeline();
-		for (int i = 0; i < 6; i++) {
+		Scanner scan = new Scanner(System.in);
+		for (int i = 0; i < 10; i++) {
 			pipeline.performCycle();
 			pipeline.printContents();
+			long value = regs.getValue(4);
+			ui.setRegister(4, value);
+			scan.nextLine();
 			System.out.println("-----\n");
+			
 		}
 	}
 	

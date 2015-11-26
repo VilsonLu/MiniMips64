@@ -1,4 +1,4 @@
-package ui;
+package ui.register;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
 
-public class InternalRegistersPanel extends JPanel {
+public class GptRegsPanel extends JPanel {
 	/**/
 	private static final long serialVersionUID = 1L;
 	
@@ -20,16 +20,16 @@ public class InternalRegistersPanel extends JPanel {
 	
 	public static void main(String[] args) {
 		JFrame frame = new JFrame("Regs test");
-		InternalRegistersPanel panel = new InternalRegistersPanel();
+		GptRegsPanel panel = new GptRegsPanel();
 		
 		frame.getContentPane().add(panel);
 		frame.setSize(640, 480);
 		frame.setVisible(true);
-		panel.updateValue(4, 0x123f);
+		panel.setRegister(4, 0x123f);
 	}
 	
 	
-	public InternalRegistersPanel() {
+	public GptRegsPanel() {
 		this.initComponents();
 	}
 	
@@ -65,7 +65,7 @@ public class InternalRegistersPanel extends JPanel {
 	}
 	
 	
-	public void updateValue(int reg, long value) {
+	public void setRegister(int reg, long value) {
 		int row = reg % 16;
 		int col = 1;
 		if (reg >= 16) {
