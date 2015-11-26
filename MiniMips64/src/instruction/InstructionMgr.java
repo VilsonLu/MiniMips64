@@ -32,9 +32,12 @@ public class InstructionMgr {
 	/**
 	 * 
 	 * @param index  This is the index, not the address.
+	 * 				 Typically, index = address / 4.	
 	 * @return
 	 */
 	public Instruction getInstruction(int index) {
 		return lines.get(index).getInstruction();
 	}
+	
+	
 }
