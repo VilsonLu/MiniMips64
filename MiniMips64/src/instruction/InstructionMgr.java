@@ -12,7 +12,7 @@ import java.util.List;
 
 public class InstructionMgr {
 	private static InstructionMgr instance;
-	private List<Instruction> lines;
+	private List<Instruction> instructions;
 	
 	
 	static {
@@ -26,7 +26,7 @@ public class InstructionMgr {
 	
 	
 	InstructionMgr() {
-		lines = new ArrayList<>();
+		instructions = new ArrayList<>();
 	}
 	
 	/**
@@ -36,8 +36,18 @@ public class InstructionMgr {
 	 * @return
 	 */
 	public Instruction getInstruction(int index) {
-		return lines.get(index);
+		try {
+			return instructions.get(index);	
+		} catch (IndexOutOfBoundsException ex){
+			return null;
+		}
+		
 	}
 	
-	
+	public void setInstructions(List<Instruction> instructions) {
+		for (int i = 0; i < instructions.size(); i++) {
+			instructions.get(i).setOrder(i);
+		}
+		this.instructions = instructions;
+	}
 }

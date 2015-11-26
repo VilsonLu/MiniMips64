@@ -8,7 +8,6 @@ import java.util.Scanner;
 
 import instruction.Instruction;
 import instruction.InstructionFactory;
-import instruction.Line;
 import util.MipsException;
 import util.MipsExceptionList;
 
@@ -21,8 +20,8 @@ public class Parser {
 	void testParser() {
 		File file = new File("mips.s");
 		try {
-			List<Line> lines = parseFile(file);
-			for (Line line : lines) {
+			List<Instruction> instructions = parseFile(file);
+			for (Instruction line : instructions) {
 				System.out.println(line);
 			}
 			
@@ -33,8 +32,8 @@ public class Parser {
 		}
 	}
 	
-	public List<Line> parseFile(File file) throws MipsExceptionList {
-		List<Line> lines = new ArrayList<>();
+	public List<Instruction> parseFile(File file) throws MipsExceptionList {
+		List<Instruction> instructions = new ArrayList<>();
 		MipsExceptionList exceptionList = new MipsExceptionList();
 		try {
 	        Scanner sc = new Scanner(file);
@@ -44,13 +43,14 @@ public class Parser {
 	        		continue;
 	        	}
 	        	
-	        	Line nextline;
+	        	Instruction nextInstruction;
+	        	
 				try {
-					nextline = this.parseLine(line);
-					if (nextline == null) {
+					nextInstruction = this.parseLine(line);
+					if (nextInstruction == null) {
 						continue;
 					}
-					lines.add(nextline);
+					instructions.add(nextInstruction);
 				} catch (MipsException e) {
 					e.setInstructionString(line);
 					exceptionList.add(e);
@@ -67,10 +67,10 @@ public class Parser {
 			throw exceptionList;
 		}
 		
-		return lines;
+		return instructions;
 	}
 	
-	public Line parseLine(String line) throws MipsException, MipsExceptionList {
+	public Instruction parseLine(String line) throws MipsException, MipsExceptionList {
 		String[] splitLine = line.split(";", 2);
 		String comment = "";
 		if (splitLine[0].trim().isEmpty()) {
@@ -82,6 +82,7 @@ public class Parser {
 		}
 		
 		Instruction instruction = new InstructionFactory().getInstruction(splitLine[0]);
-		return new Line(instruction, comment); 
+		instruction.setComment(comment);
+		return instruction; 
 	}
 }

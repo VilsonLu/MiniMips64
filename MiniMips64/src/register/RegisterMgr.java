@@ -37,11 +37,9 @@ public class RegisterMgr {
 	public static final String EX_MEM_B = "EX//MEM.B";
 	public static final String EX_MEM_COND = "EX//MEM.COND";
 	
-	
 	public static final String MEM_WB_ALUOUTPUT = "MEM//WB.ALUOUTPUT";
 	public static final String MEM_WB_LMD = "MEM//WB.LMD";	
 	public static final String MEM_WB_IR = "MEM//WB.IR";
-	
 	
 	
 	private RegisterMgr() {

@@ -1,6 +1,12 @@
+import java.util.ArrayList;
+
+import instruction.Instruction;
+import instruction.InstructionMgr;
 import instruction.alu.AluInstruction;
+import instruction.alu.Daddu;
 import instruction.alu.Or;
 import memory.MemoryMgr;
+import pipeline.Pipeline;
 import register.RegisterMgr;
 import util.Helper;
 
@@ -32,6 +38,24 @@ public class Tests {
 		regs.setValue(2, 5);
 		regs.setValue(3, 7);
 		
+		Instruction a = new Daddu("4,1,2");
+		Instruction b = new Or("5,2,3");
+		ArrayList<Instruction> list = new ArrayList<>();
+		list.add(a);
+		list.add(b);
+		
+		InstructionMgr instructions = InstructionMgr.getInstance();
+		instructions.setInstructions(list);
+		
+		
+		System.out.println(regs.getValue(4));
+		
+		Pipeline pipeline = new Pipeline();
+		for (int i = 0; i < 6; i++) {
+			pipeline.performCycle();
+			pipeline.printContents();
+			System.out.println("-----\n");
+		}
 	}
 	
 	
