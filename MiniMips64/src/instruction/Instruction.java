@@ -4,6 +4,7 @@ import instruction.opcode.Opcode;
 import register.RegisterMgr;
 
 public abstract class Instruction {
+	private String comment;
 	private Opcode opcode;
 	private int order;
 	
@@ -24,6 +25,15 @@ public abstract class Instruction {
 		return opcode;
 	}
 	
+	
+	public String getComment() {
+		return comment;
+	}
+	
+	
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
 	
 	public void ife() {
 		RegisterMgr regs = RegisterMgr.getInstance();

@@ -12,7 +12,7 @@ import java.util.List;
 
 public class InstructionMgr {
 	private static InstructionMgr instance;
-	private List<Line> lines;
+	private List<Instruction> lines;
 	
 	
 	static {
@@ -36,7 +36,7 @@ public class InstructionMgr {
 	 * @return
 	 */
 	public Instruction getInstruction(int index) {
-		return lines.get(index).getInstruction();
+		return lines.get(index);
 	}
 	
 	
