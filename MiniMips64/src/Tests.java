@@ -1,13 +1,13 @@
 import java.util.ArrayList;
 
-import instruction.Instruction;
-import instruction.InstructionMgr;
-import instruction.alu.AluInstruction;
-import instruction.alu.Daddu;
-import instruction.alu.Or;
-import memory.MemoryMgr;
-import pipeline.Pipeline;
-import register.RegisterMgr;
+import api.instruction.Instruction;
+import api.instruction.InstructionMgr;
+import api.instruction.alu.AluInstruction;
+import api.instruction.alu.Daddu;
+import api.instruction.alu.Or;
+import api.memory.MemoryMgr;
+import api.pipeline.Pipeline;
+import api.register.RegisterMgr;
 import util.Helper;
 
 public class Tests {
