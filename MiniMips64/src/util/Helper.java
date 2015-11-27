@@ -31,6 +31,26 @@ public class Helper {
 	}
 	
 	
+	/**
+	 * Pads the value with zeros and adds spaces every 4 digits.
+	 * @param value
+	 * @return
+	 */
+	public static String prettifyHex(long value, int zeros) {
+		String str = String.format("%0" + Integer.toString(zeros) + "x", value);
+		StringBuilder result = new StringBuilder();
+		
+		for(int i = 0 ; i < str.length(); i++) {
+		   if (i % 4 == 0 && i != 0) {
+			   result = result.append(' ');
+		   }
+		   result = result.append(str.charAt(i));   
+		}
+
+		return result.toString();
+	}
+	
+	
 	public static String BinaryToHex(String binary) throws Exception {
 		int binLength = binary.length();
 		if (binLength % 4 == 0){
