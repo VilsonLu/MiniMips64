@@ -8,6 +8,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
+import util.Helper;
 
 public class GptRegsPanel extends JPanel {
 	
@@ -69,27 +70,6 @@ public class GptRegsPanel extends JPanel {
 		if (reg >= 16) {
 			col = 3;
 		}
-		model.setValueAt(this.prettifyHex(value, 16), row, col);		
-	}
-	
-	
-	/**
-	 * Pads the value with zeros and adds spaces every 4 digits.
-	 * @param value
-	 * @return
-	 */
-	private String prettifyHex(long value, int zeros) {
-		String format = "%%" + Integer.toString(zeros) + "x";
-		String str = String.format(format, value);
-		StringBuilder result = new StringBuilder();
-		
-		for(int i = 0 ; i < str.length(); i++) {
-		   if (i % 4 == 0 && i != 0) {
-			   result = result.append(' ');
-		   }
-		   result = result.append(str.charAt(i));   
-		}
-
-		return result.toString();
+		model.setValueAt(Helper.prettifyHex(value, 16), row, col);		
 	}
 }

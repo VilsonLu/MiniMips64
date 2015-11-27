@@ -1,6 +1,7 @@
 package api.register;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -109,8 +110,13 @@ public class RegisterMgr {
 		}
 	}
 	
-	public Map<String, RegisterCell> getInternalRegs() {
-		return internalRegs;
+	public Map<String, Long> getInternalRegs() {
+		Map<String, Long> result = new HashMap<>();
+		for (String key : internalRegs.keySet()) {
+			result.put(key, internalRegs.get(key).getValue());
+		}
+		
+		return result;
 	}
 	
 	public void incrementPc() {
