@@ -22,24 +22,24 @@ public class RegisterMgr {
 	private Map<String, RegisterCell> internalRegs;
 	private boolean exMemCodeIsBranch = false;
 	
-	public static final String IF_ID_IR = "IF//ID.IR";
-	public static final String IF_ID_NPC = "IF//ID.NPC";
 	public static final String PC = "PC";
+	public static final String IF_ID_IR = "IF/ID.IR";
+	public static final String IF_ID_NPC = "IF/ID.NPC";
 	
-	public static final String ID_EX_IR = "ID//EX.IR";
-	public static final String ID_EX_A = "ID//EX.A";
-	public static final String ID_EX_B = "ID//EX.B";
-	public static final String ID_EX_IMM = "ID//EX.IMM";
-	public static final String ID_EX_NPC = "ID//EX.NPC";
+	public static final String ID_EX_IR = "ID/EX.IR";
+	public static final String ID_EX_A = "ID/EX.A";
+	public static final String ID_EX_B = "ID/EX.B";
+	public static final String ID_EX_IMM = "ID/EX.IMM";
+	public static final String ID_EX_NPC = "ID/EX.NPC";
 	
-	public static final String EX_MEM_IR = "EX//MEM.IR";
-	public static final String EX_MEM_ALUOUTPUT = "EX//MEM.ALUOUTPUT";
-	public static final String EX_MEM_B = "EX//MEM.B";
-	public static final String EX_MEM_COND = "EX//MEM.COND";
+	public static final String EX_MEM_IR = "EX/MEM.IR";
+	public static final String EX_MEM_ALUOUTPUT = "EX/MEM.ALUOUTPUT";
+	public static final String EX_MEM_B = "EX/MEM.B";
+	public static final String EX_MEM_COND = "EX/MEM.COND";
 	
-	public static final String MEM_WB_ALUOUTPUT = "MEM//WB.ALUOUTPUT";
-	public static final String MEM_WB_LMD = "MEM//WB.LMD";	
-	public static final String MEM_WB_IR = "MEM//WB.IR";
+	public static final String MEM_WB_ALUOUTPUT = "MEM/WB.ALUOUTPUT";
+	public static final String MEM_WB_LMD = "MEM/WB.LMD";	
+	public static final String MEM_WB_IR = "MEM/WB.IR";
 	
 	
 	private RegisterMgr() {
@@ -52,9 +52,9 @@ public class RegisterMgr {
 		
 		internalRegs = new LinkedHashMap<>();
 		
+		internalRegs.put(PC, new RegisterCell());
 		internalRegs.put(IF_ID_IR, new RegisterCell());
 		internalRegs.put(IF_ID_NPC, new RegisterCell());
-		internalRegs.put(PC, new RegisterCell());
 		
 		internalRegs.put(ID_EX_IR, new RegisterCell());
 		internalRegs.put(ID_EX_A, new RegisterCell());
@@ -109,6 +109,9 @@ public class RegisterMgr {
 		}
 	}
 	
+	public Map<String, RegisterCell> getInternalRegs() {
+		return internalRegs;
+	}
 	
 	public void incrementPc() {
 		RegisterCell pc = internalRegs.get(PC);

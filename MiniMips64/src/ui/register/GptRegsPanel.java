@@ -10,9 +10,8 @@ import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
 
 public class GptRegsPanel extends JPanel {
-	/**/
-	private static final long serialVersionUID = 1L;
 	
+	/**/ private static final long serialVersionUID = 4384089892956276908L;
 	private final int REG_LABEL_WIDTH = 30;
 	private final int REG_VALUES_WIDTH = 130;
 
@@ -51,7 +50,6 @@ public class GptRegsPanel extends JPanel {
 		JTable regsTable = new JTable(model);
 		regsTable.getColumnModel().getColumn(0).setPreferredWidth(REG_LABEL_WIDTH);
 		regsTable.getColumnModel().getColumn(2).setPreferredWidth(REG_LABEL_WIDTH);
-		
 		regsTable.getColumnModel().getColumn(1).setPreferredWidth(REG_VALUES_WIDTH);
 		regsTable.getColumnModel().getColumn(3).setPreferredWidth(REG_VALUES_WIDTH);
 		
@@ -71,7 +69,7 @@ public class GptRegsPanel extends JPanel {
 		if (reg >= 16) {
 			col = 3;
 		}
-		model.setValueAt(this.prettifyHex(value), row, col);		
+		model.setValueAt(this.prettifyHex(value, 16), row, col);		
 	}
 	
 	
@@ -80,8 +78,9 @@ public class GptRegsPanel extends JPanel {
 	 * @param value
 	 * @return
 	 */
-	private String prettifyHex(long value) {
-		String str = String.format("%016x", value);
+	private String prettifyHex(long value, int zeros) {
+		String format = "%%" + Integer.toString(zeros) + "x";
+		String str = String.format(format, value);
 		StringBuilder result = new StringBuilder();
 		
 		for(int i = 0 ; i < str.length(); i++) {
