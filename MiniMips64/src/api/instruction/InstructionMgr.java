@@ -46,7 +46,7 @@ public class InstructionMgr {
 	
 	public void setInstructions(List<Instruction> instructions) {
 		for (int i = 0; i < instructions.size(); i++) {
-			instructions.get(i).setOrder(i);
+			instructions.get(i).setId(i);
 		}
 		this.instructions = instructions;
 	}

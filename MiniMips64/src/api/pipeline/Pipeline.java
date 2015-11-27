@@ -1,6 +1,8 @@
 package api.pipeline;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import api.instruction.Instruction;
 import api.instruction.InstructionMgr;
@@ -85,6 +87,32 @@ public class Pipeline {
 		}
 		
 		cycle++;
+	}
+	
+	
+	public long getCycle() {
+		return cycle;
+	}
+	
+	
+	public void getInstructionPipelines() {
+		Map<Instruction, String> result = new HashMap<>();
+		
+		if (ife != null) {
+			result.put(ife, "IF");
+		}
+		if (id != null) {
+			result.put(id, "ID");
+		}
+		if (ex != null) {
+			result.put(ex, "EX");
+		}
+		if (mem != null) {
+			result.put(mem, "MEM");
+		}
+		if (wb != null) {
+			result.put(wb, "WB");
+		}
 	}
 	
 	

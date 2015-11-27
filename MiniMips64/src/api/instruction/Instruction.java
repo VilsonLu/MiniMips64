@@ -6,7 +6,7 @@ import api.register.RegisterMgr;
 public abstract class Instruction {
 	private String comment;
 	private Opcode opcode;
-	private int order;
+	private int id;
 	
 	public abstract String getStringCode();
 
@@ -71,17 +71,29 @@ public abstract class Instruction {
 	public abstract void wb();
 	
 	
-	public int getOrder() {
-		return order;
+	public int getId() {
+		return id;
 	}
 	
 	
-	public void setOrder(int order) {
-		this.order = order;
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	@Override
 	public String toString() {
 		return this.getStringCode();
+	}
+	
+	
+	@Override
+	public boolean equals(Object other){
+	    if (other == null) return false;
+	    if (other == this) return true;
+	    if (!(other instanceof Instruction)) return false;
+	    
+	    Instruction otherInstruction = (Instruction) other;
+	    
+	    return this.id == otherInstruction.id;
 	}
 }
