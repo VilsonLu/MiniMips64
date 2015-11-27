@@ -7,12 +7,18 @@ public abstract class Instruction {
 	private String comment;
 	private Opcode opcode;
 	private int id;
+	private String label = "";
 	
 	public abstract String getStringCode();
 
 	
 	public String getBinaryCode() {
 		return opcode.getBinaryCode();
+	}
+	
+	
+	public long getLongCode() {
+		return Long.parseLong(this.getBinaryCode(), 2);
 	}
 	
 	
@@ -33,6 +39,16 @@ public abstract class Instruction {
 	
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	
+	public String getLabel() {
+		return label;
+	}
+	
+	
+	public void setLabel(String label) {
+		this.label = label;
 	}
 	
 	public void ife() {
