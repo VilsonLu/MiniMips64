@@ -31,4 +31,6 @@ public class Daddu extends AluInstruction {
 		long b = regs.getValue(RegisterMgr.ID_EX_B);
 		return a + b;
 	}
+	
+	
 }

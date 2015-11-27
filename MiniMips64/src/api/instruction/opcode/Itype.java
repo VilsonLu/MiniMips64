@@ -1,5 +1,8 @@
 package api.instruction.opcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import util.Helper;
 
 public class Itype extends Opcode {
@@ -52,5 +55,22 @@ public class Itype extends Opcode {
 	
 	public void setImm(String imm) {
 		this.imm = Long.parseLong(imm);
+	}
+	
+	
+	@Override
+	public boolean outputsTo(List<String> regs) {
+		String destination = "r" + this.getRt();
+		return regs.contains(destination);
+	}
+
+
+	@Override
+	public List<String> getInputs() {
+		ArrayList<String> inputs = new ArrayList<>();
+		if (this.getRt() != 0) {
+			inputs.add("r"+ this.getRt());	
+		}
+		return null;
 	}
 }

@@ -1,7 +1,9 @@
 package api.instruction.alu;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import api.instruction.Instruction;
-import api.instruction.opcode.Opcode;
 import api.register.RegisterMgr;
 
 public abstract class AluInstruction extends Instruction {

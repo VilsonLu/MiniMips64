@@ -1,5 +1,8 @@
 package api.instruction.branch;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import api.instruction.opcode.Itype;
 import api.register.RegisterMgr;
 
@@ -32,4 +35,19 @@ public class Beq extends BranchInstruction {
 	}
 
 	
+	@Override
+	public List<String> getInputs() {
+		String rs = "r" + opcode.getRs();
+		String rt = "r" + opcode.getRt();
+		ArrayList<String> inputs = new ArrayList<>();
+		inputs.add(rs);
+		inputs.add(rt);
+		return inputs;
+	}
+
+	
+	@Override
+	public boolean outputsTo(List<String> regs) {
+		return false;
+	}
 }

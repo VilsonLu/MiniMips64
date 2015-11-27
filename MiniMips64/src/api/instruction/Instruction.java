@@ -1,5 +1,7 @@
 package api.instruction;
 
+import java.util.List;
+
 import api.instruction.opcode.Opcode;
 import api.register.RegisterMgr;
 
@@ -8,10 +10,10 @@ public abstract class Instruction {
 	private Opcode opcode;
 	private int id;
 	private String label = "";
+	private boolean stall = false;
 	
 	public abstract String getStringCode();
 
-	
 	public String getBinaryCode() {
 		return opcode.getBinaryCode();
 	}
@@ -41,6 +43,15 @@ public abstract class Instruction {
 		this.comment = comment;
 	}
 	
+	
+	public List<String> getInputs() {
+		return opcode.getInputs();
+	}
+
+	
+	public boolean outputsTo(List<String> regs) {
+		return opcode.outputsTo(regs);
+	}
 	
 	public String getLabel() {
 		return label;
