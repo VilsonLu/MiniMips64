@@ -1,5 +1,6 @@
 package ui;
 
+import java.util.Map;
 
 public class UiFacade {
 	MainPanel panel;
@@ -13,5 +14,9 @@ public class UiFacade {
 	
 	public void setRegister(int reg, long value) {
 		panel.setRegister(reg, value);
+	}
+	
+	public void setInternalRegisters(Map<String, Long> registers) {
+		panel.setInternalRegisters(registers);
 	}
 }

@@ -64,6 +64,7 @@ public class Tests {
 			pipeline.printContents();
 			long value = regs.getValue(4);
 			ui.setRegister(4, value);
+			ui.setInternalRegisters(regs.getInternalRegs());
 			scan.nextLine();
 			System.out.println("-----\n");
 			
