@@ -44,6 +44,6 @@ public class Lw extends LoadStoreInstruction {
 	public void wb() {
 		RegisterMgr regs = RegisterMgr.getInstance();
 		long value = regs.getValue(RegisterMgr.MEM_WB_LMD);
-		regs.setValue(opcode.getDestination(), value);
+		regs.setRValue(opcode.getDestination(), value);
 	}
 }

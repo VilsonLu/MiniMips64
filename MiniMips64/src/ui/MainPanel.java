@@ -32,10 +32,24 @@ public class MainPanel extends JPanel {
 	}
 	
 	
-	void setRegister(int reg, long value) {
-		gptRegs.setRegister(reg, value);
+	void setR(int reg, long value) {
+		gptRegs.setR(reg, value);
 	}
 	
+	
+	void setF(int reg, long value) {
+		gptRegs.setF(reg, value);
+	}
+	
+	
+	void setHi(long value) {
+		gptRegs.setHi(value);
+	}
+	
+	
+	void setLo(long value) {
+		gptRegs.setLo(value);
+	}
 	
 	void setInternalRegisters(Map<String, Long> regs) {
 		internalRegs.setRegisters(regs);

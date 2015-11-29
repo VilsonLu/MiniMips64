@@ -37,14 +37,14 @@ public class Tests {
 		}
 		
 		RegisterMgr regs = RegisterMgr.getInstance();
-		regs.setValue(1, 3);
-		regs.setValue(2, 5);
-		regs.setValue(3, 7);
+		regs.setRValue(1, 3);
+		regs.setRValue(2, 5);
+		regs.setRValue(3, 7);
 		
 		UiFacade ui = new UiFacade();
-		ui.setRegister(1, 3);
-		ui.setRegister(2, 5);
-		ui.setRegister(3, 7);
+		ui.setR(1, 3);
+		ui.setR(2, 5);
+		ui.setR(3, 7);
 		
 		Instruction a = new Daddu("4,1,2");
 		Instruction b = new Or("5,2,3");
@@ -55,15 +55,15 @@ public class Tests {
 		InstructionMgr instructions = InstructionMgr.getInstance();
 		instructions.setInstructions(list);
 		
-		System.out.println(regs.getValue(4));
+		System.out.println(regs.getRValue(4));
 		
 		Pipeline pipeline = new Pipeline();
 		Scanner scan = new Scanner(System.in);
 		for (int i = 0; i < 10; i++) {
 			pipeline.performCycle();
 			pipeline.printContents();
-			long value = regs.getValue(4);
-			ui.setRegister(4, value);
+			long value = regs.getRValue(4);
+			ui.setR(4, value);
 			ui.setInternalRegisters(regs.getInternalRegs());
 			scan.nextLine();
 			System.out.println("-----\n");
