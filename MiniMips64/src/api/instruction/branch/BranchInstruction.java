@@ -13,7 +13,8 @@ public abstract class BranchInstruction extends Instruction {
 		regs.setExMemCodeIsBranch(true);
 		
 		long aluoutput = regs.getValue(RegisterMgr.ID_EX_NPC) + regs.getValue(RegisterMgr.ID_EX_IMM) * 4;
-		
+		long ir = regs.getValue(RegisterMgr.ID_EX_IR);
+		regs.setValue(RegisterMgr.EX_MEM_IR, ir);
 		regs.setValue(RegisterMgr.EX_MEM_COND, 0);
 		regs.setValue(RegisterMgr.EX_MEM_ALUOUTPUT, aluoutput);
 	}

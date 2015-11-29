@@ -50,6 +50,9 @@ public abstract class Instruction {
 
 	
 	public boolean outputsTo(List<String> regs) {
+		if (regs == null) {
+			return false;
+		}
 		return opcode.outputsTo(regs);
 	}
 	

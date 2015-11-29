@@ -1,6 +1,5 @@
 package api.pipeline;
 
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -76,7 +75,10 @@ public class Pipeline {
 		}
 		
 		/* Check for stall */
-		List<String> inputs = id.getInputs();
+		List<String> inputs = null;
+		if (id != null) {
+			inputs = id.getInputs();
+		}
 		stall = false; 
 		if (ex != null) {
 			stall = ex.outputsTo(inputs);
@@ -104,7 +106,7 @@ public class Pipeline {
 		if (if_ != null && !stall) {
 			if_.ife();
 		}
-		
+		this.printContents();
 		cycle++;
 	}
 	

@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.event.ActionListener;
 import java.util.Map;
 
 public class UiFacade {
@@ -20,6 +21,7 @@ public class UiFacade {
 	public void setRegister(int reg, long value) {
 		panel.setRegister(reg, value);
 	}
+
 	
 	public void setInternalRegisters(Map<String, Long> registers) {
 		panel.setInternalRegisters(registers);
@@ -28,5 +30,10 @@ public class UiFacade {
 	
 	public void setMem(int index, long value) {
 		panel.setMem(index, value);
+	}
+	
+	
+	public void addOneCycleButtonListener(ActionListener listener) {
+		panel.addOneCycleButtonListener(listener);
 	}
 }

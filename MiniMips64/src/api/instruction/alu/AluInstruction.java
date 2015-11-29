@@ -1,8 +1,5 @@
 package api.instruction.alu;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import api.instruction.Instruction;
 import api.register.RegisterMgr;
 
@@ -19,6 +16,9 @@ public abstract class AluInstruction extends Instruction {
 	public void ex() {
 		RegisterMgr regs = RegisterMgr.getInstance();
 		regs.setExMemCodeIsBranch(false);
+		long ir = regs.getValue(RegisterMgr.ID_EX_IR);
+		
+		regs.setValue(RegisterMgr.EX_MEM_IR, ir);
 		regs.setValue(RegisterMgr.EX_MEM_COND, 0);
 		regs.setValue(RegisterMgr.EX_MEM_ALUOUTPUT, this.getExOperation());
 	}
