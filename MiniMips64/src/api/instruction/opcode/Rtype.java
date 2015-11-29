@@ -1,5 +1,8 @@
 package api.instruction.opcode;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import util.Helper;
 
 public class Rtype extends Opcode {
@@ -54,5 +57,26 @@ public class Rtype extends Opcode {
 	
 	public int getFunc() { 
 		return func; 
+	}
+
+	
+	@Override
+	public List<String> getInputs() {
+		ArrayList<String> inputs = new ArrayList<>();
+		if (this.getRs() != 0) {
+			inputs.add("r"+ this.getRs());	
+		}
+		if (this.getRt() != 0) {
+			inputs.add("r"+ this.getRt());	
+		}
+		
+		return inputs;
+	}
+
+
+	@Override
+	public boolean outputsTo(List<String> regs) {
+		String destination = "r" + this.getRd();
+		return regs.contains(destination);
 	}
 }

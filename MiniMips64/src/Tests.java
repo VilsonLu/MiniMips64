@@ -67,7 +67,6 @@ public class Tests {
 			ui.setInternalRegisters(regs.getInternalRegs());
 			scan.nextLine();
 			System.out.println("-----\n");
-			
 		}
 	}
 	

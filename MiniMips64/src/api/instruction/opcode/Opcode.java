@@ -1,5 +1,7 @@
 package api.instruction.opcode;
 
+import java.util.List;
+
 public abstract class Opcode {
 	private final String stringInstruction;
 	private final int numCode;
@@ -9,6 +11,8 @@ public abstract class Opcode {
 	private int destination;
 	
 	public abstract String getBinaryCode();
+	public abstract List<String> getInputs();
+	public abstract boolean outputsTo(List<String> regs);
 	
 	protected Opcode(String stringCode, int numCode) {
 		this.stringInstruction = stringCode;

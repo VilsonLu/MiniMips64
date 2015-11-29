@@ -1,5 +1,8 @@
 package api.instruction;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import api.instruction.opcode.Rtype;
 
 public class Nop extends Instruction {
@@ -16,6 +19,12 @@ public class Nop extends Instruction {
 		return "NOP";
 	}
 
+	
+	@Override
+	public List<String> getInputs() {
+		ArrayList<String> inputs = new ArrayList<>();
+		return inputs;
+	}
 	
 	
 	@Override

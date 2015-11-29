@@ -1,18 +1,26 @@
 package api.instruction;
 
+import java.util.List;
+
 import api.instruction.opcode.Opcode;
 import api.register.RegisterMgr;
 
 public abstract class Instruction {
 	private String comment;
 	private Opcode opcode;
-	private int order;
+	private int id;
+	private String label = "";
+	private boolean stall = false;
 	
 	public abstract String getStringCode();
 
-	
 	public String getBinaryCode() {
 		return opcode.getBinaryCode();
+	}
+	
+	
+	public long getLongCode() {
+		return Long.parseLong(this.getBinaryCode(), 2);
 	}
 	
 	
@@ -33,6 +41,28 @@ public abstract class Instruction {
 	
 	public void setComment(String comment) {
 		this.comment = comment;
+	}
+	
+	
+	public List<String> getInputs() {
+		return opcode.getInputs();
+	}
+
+	
+	public boolean outputsTo(List<String> regs) {
+		if (regs == null) {
+			return false;
+		}
+		return opcode.outputsTo(regs);
+	}
+	
+	public String getLabel() {
+		return label;
+	}
+	
+	
+	public void setLabel(String label) {
+		this.label = label;
 	}
 	
 	public void ife() {
@@ -71,17 +101,29 @@ public abstract class Instruction {
 	public abstract void wb();
 	
 	
-	public int getOrder() {
-		return order;
+	public int getId() {
+		return id;
 	}
 	
 	
-	public void setOrder(int order) {
-		this.order = order;
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	@Override
 	public String toString() {
 		return this.getStringCode();
+	}
+	
+	
+	@Override
+	public boolean equals(Object other){
+	    if (other == null) return false;
+	    if (other == this) return true;
+	    if (!(other instanceof Instruction)) return false;
+	    
+	    Instruction otherInstruction = (Instruction) other;
+	    
+	    return this.id == otherInstruction.id;
 	}
 }

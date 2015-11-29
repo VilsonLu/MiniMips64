@@ -1,13 +1,14 @@
 package ui.register;
 
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 import net.miginfocom.swing.MigLayout;
+import ui.MainFrame;
 import util.Helper;
 
 public class GptRegsPanel extends JPanel {
@@ -19,13 +20,9 @@ public class GptRegsPanel extends JPanel {
 	private DefaultTableModel model;
 	
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("Regs test");
-		GptRegsPanel panel = new GptRegsPanel();
-		
-		frame.getContentPane().add(panel);
-		frame.setSize(640, 480);
-		frame.setVisible(true);
-		panel.setRegister(4, 0x123f);
+		MainFrame frame = new MainFrame();
+		GptRegsPanel panel = new GptRegsPanel();	
+		frame.setPanel(panel);
 	}
 	
 	
@@ -60,7 +57,7 @@ public class GptRegsPanel extends JPanel {
 		regsTable.getColumnModel().getColumn(1).setCellRenderer(rightRenderer);
 		regsTable.getColumnModel().getColumn(2).setCellRenderer(rightRenderer);
 		regsTable.getColumnModel().getColumn(3).setCellRenderer(rightRenderer);
-		this.add(regsTable);
+		this.add(new JScrollPane(regsTable));
 	}
 	
 	
