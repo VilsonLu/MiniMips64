@@ -62,8 +62,16 @@ public class Pipeline {
 		}
 	}
 	
+	
 	public void performCycle() {
-		/* Move registers forward */
+		this.moveRegistersForward();
+		this.checkForStall();
+		this.runPipeline();
+		cycle++;
+	}
+	
+	
+	private void moveRegistersForward() {
 		wb = mem;
 		mem = ex;
 		if (!stall) {
@@ -74,7 +82,10 @@ public class Pipeline {
 			ex = null;
 		}
 		
-		/* Check for stall */
+	}
+	
+	
+	private void checkForStall() {
 		List<String> inputs = null;
 		if (id != null) {
 			inputs = id.getInputs();
@@ -89,8 +100,9 @@ public class Pipeline {
 		if (!stall && wb != null) {
 			stall = wb.outputsTo(inputs);
 		}
-		
-		/* Run pipeline */ 
+	}
+	
+	private void runPipeline() {
 		if (wb != null) {
 			wb.wb();
 		}
@@ -106,10 +118,8 @@ public class Pipeline {
 		if (if_ != null && !stall) {
 			if_.ife();
 		}
-		this.printContents();
-		cycle++;
-	}
 	
+	}
 	
 	public long getCycle() {
 		return cycle;
