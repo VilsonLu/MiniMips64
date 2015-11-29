@@ -1,14 +1,13 @@
 package ui.register;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import api.register.RegisterCell;
 import api.register.RegisterMgr;
 import net.miginfocom.swing.MigLayout;
 import ui.MainFrame;
@@ -73,9 +72,9 @@ public class InternalRegsPanel extends JPanel {
 		}
 		
 		JTable regsTable = new JTable(model);
+		this.add(new JScrollPane(regsTable));
 		regsTable.getColumnModel().getColumn(0).setPreferredWidth(REG_LABEL_WIDTH);
 		regsTable.getColumnModel().getColumn(1).setPreferredWidth(REG_VALUES_WIDTH);
-		this.add(regsTable);
 	}
 	
 	

@@ -5,6 +5,11 @@ import java.util.Map;
 public class UiFacade {
 	MainPanel panel;
 	
+	public static void main(String[] args) {
+		UiFacade facade = new UiFacade();
+		
+	}
+	
 	public UiFacade() {
 		MainFrame frame = new MainFrame();
 		panel = new MainPanel();
@@ -18,5 +23,10 @@ public class UiFacade {
 	
 	public void setInternalRegisters(Map<String, Long> registers) {
 		panel.setInternalRegisters(registers);
+	}
+	
+	
+	public void setMem(int index, long value) {
+		panel.setMem(index, value);
 	}
 }
