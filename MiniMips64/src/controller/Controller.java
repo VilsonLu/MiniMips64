@@ -10,6 +10,7 @@ import api.instruction.InstructionMgr;
 import api.instruction.alu.Daddu;
 import api.instruction.alu.Or;
 import api.pipeline.Pipeline;
+import api.register.RegisterListener;
 import api.register.RegisterMgr;
 import ui.UiFacade;
 
@@ -20,25 +21,10 @@ public class Controller {
 	
 	public static void main(String[] args) {
 		new Controller();
-	}
-	
-	public Controller() {
-		ui.addOneCycleButtonListener(new OneCycleListener());
 		RegisterMgr regs = RegisterMgr.getInstance();
-		InstructionMgr instructions = InstructionMgr.getInstance();
-		instructions.setInstructions(this.getInstructions());
-		
-		ui.setInternalRegisters(regs.getInternalRegs());
-	}
-	
-	
-	private class OneCycleListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			pipeline.performCycle();
-			RegisterMgr regs = RegisterMgr.getInstance();
-			ui.setInternalRegisters( regs.getInternalRegs() );
-		}
+		regs.setRValue(1, 3);
+		regs.setRValue(2, 5);
+		regs.setRValue(3, 6);
 	}
 	
 	private List<Instruction> getInstructions() {
@@ -50,4 +36,49 @@ public class Controller {
 		
 		return list;
 	}
+	
+	public Controller() {
+		ui.addOneCycleButtonListener(new OneCycleListener());
+		RegisterMgr regs = RegisterMgr.getInstance();
+		InstructionMgr instructions = InstructionMgr.getInstance();
+		instructions.setInstructions(this.getInstructions());
+		
+		ui.setInternalRegisters(regs.getInternalRegs());
+		regs.setListener(new RegListener());
+	}
+	
+	
+	private class RegListener implements RegisterListener {
+
+		@Override
+		public void rChanged(int index, long value) {
+			ui.setR(index, value);
+		}
+
+		@Override
+		public void fChanged(int index, long value) {
+			ui.setF(index, value);
+		}
+
+		@Override
+		public void hiChanged(long value) {
+			ui.setHi(value);
+		}
+
+		@Override
+		public void loChanged(long value) {
+			ui.setLo(value);
+		}
+	}
+	
+	private class OneCycleListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			pipeline.performCycle();
+			RegisterMgr regs = RegisterMgr.getInstance();
+			ui.setInternalRegisters( regs.getInternalRegs() );
+		}
+	}
+	
+	
 }

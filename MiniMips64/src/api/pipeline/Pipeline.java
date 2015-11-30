@@ -25,7 +25,7 @@ public class Pipeline {
 	private long cycle = 0;
 	private boolean stall;
 	private boolean branchActive;
-	private Exec lastExec;
+	private Exec lastExec = Exec.EX;
 	
 	
 	

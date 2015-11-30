@@ -43,6 +43,7 @@ public class RegisterMgr {
 	public static final String MEM_WB_LMD = "MEM/WB.LMD";	
 	public static final String MEM_WB_IR = "MEM/WB.IR";
 	
+	private RegisterListener listener;
 	
 	private RegisterMgr() {
 		rRegs = new ArrayList<>();
@@ -78,6 +79,11 @@ public class RegisterMgr {
 		internalRegs.put(MEM_WB_IR, new RegisterCell());
 		internalRegs.put(MEM_WB_ALUOUTPUT, new RegisterCell());
 		internalRegs.put(MEM_WB_LMD, new RegisterCell());
+	}
+	
+	
+	public void setListener(RegisterListener listener) {
+		this.listener = listener;
 	}
 	
 	
@@ -119,23 +125,38 @@ public class RegisterMgr {
 	
 	public void setValue(String key, long value) {
 		if (key.startsWith("r")) {
-			int index = Integer.valueOf(key.substring(0, 1));
+			int index = Integer.valueOf(key.substring(1));
+			if (index == 0) {
+				return;
+			}
 			this.setRValue(index, value);
+			if (listener != null) {
+				listener.rChanged(index, value);
+			}
 		
 		} else if (key.startsWith("f")) {
-			int index = Integer.valueOf(key.substring(0, 1));
+			int index = Integer.valueOf(key.substring(1));
 			this.setFValue(index, value);
+			if (listener != null) {
+				listener.fChanged(index, value);
+			}
 		
 		} else if (key.equals("hi")) {
 			hi.setValue(value);
+			if (listener != null) {
+				listener.hiChanged(value);
+			}
 		
 		} else if (key.equals("lo")){
 			lo.setValue(value);
+			if (listener != null) {
+				listener.loChanged(value);
+			}
 		
 		} else {
 			internalRegs.get(key).setValue(value);
 		}
-	}
+	} 
 	
 	
 	public Map<String, Long> getInternalRegs() {
