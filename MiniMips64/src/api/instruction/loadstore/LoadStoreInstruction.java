@@ -13,7 +13,7 @@ public abstract class LoadStoreInstruction extends Instruction {
 		regs.setExMemCodeWasBranch(false);
 		regs.setValue(RegisterMgr.EX_MEM_COND, 0);
 		
-		long aluoutput = regs.getOldValue(RegisterMgr.ID_EX_A) + regs.getValue(RegisterMgr.ID_EX_IMM);
+		long aluoutput = regs.getOldValue(RegisterMgr.ID_EX_A) + regs.getOldValue(RegisterMgr.ID_EX_IMM);
 		long b = regs.getOldValue(RegisterMgr.ID_EX_B);
 		long ir = regs.getOldValue(RegisterMgr.ID_EX_IR);
 		

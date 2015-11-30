@@ -1,16 +1,13 @@
 package api.instruction.loadstore;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import api.instruction.opcode.Itype;
 import api.memory.MemoryMgr;
 import api.register.RegisterMgr;
 
-public class Sw extends LoadStoreInstruction {
+public class Ss extends LoadStoreInstruction {
 	private Itype opcode;
 	
-	public Sw(String registerString) {
+	public Ss(String registerString) {
 		super();
 		opcode = new Itype("LWU", 37);
 		this.setOpcode(opcode);
@@ -31,30 +28,13 @@ public class Sw extends LoadStoreInstruction {
 		regs.setValue(RegisterMgr.ID_EX_A, a);
 		regs.setValue(RegisterMgr.ID_EX_B, b);
 	}
-
 	
-	@Override
-	public boolean outputsTo(List<String> regs) {
-		return false;
-	}
 
-
-	@Override
-	public List<String> getInputs() {
-		ArrayList<String> inputs = new ArrayList<>();
-		if (opcode.getRs() != 0) {
-			inputs.add("r"+ opcode.getRs());	
-		}
-		return null;
-	}
-	
-	
 	@Override
 	public String getStringCode() {
 		return opcode.getStringCodeRegOffsetReg();
 	}
 
-	
 	@Override
 	public void mem() {
 		MemoryMgr mems = MemoryMgr.getInstance();
@@ -68,8 +48,8 @@ public class Sw extends LoadStoreInstruction {
 		}
 	}
 
-	
 	@Override
 	public void wb() {
 	}
+
 }

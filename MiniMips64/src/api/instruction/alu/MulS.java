@@ -16,6 +16,17 @@ public class MulS extends AluInstruction {
 	}
 	
 	@Override
+	public void id() {
+		super.id();
+		RegisterMgr regs = RegisterMgr.getInstance();
+		long a = regs.getFValue(opcode.getRs());
+		long b = regs.getFValue(opcode.getRt());
+		regs.setValue(RegisterMgr.ID_EX_A, a);
+		regs.setValue(RegisterMgr.ID_EX_B, b);
+	}
+
+	
+	@Override
 	long getExOperation() {
 		// cheat mode. feels wrong
 		RegisterMgr regs = RegisterMgr.getInstance();
