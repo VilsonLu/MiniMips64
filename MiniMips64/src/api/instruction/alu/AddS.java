@@ -19,11 +19,11 @@ public class AddS extends AluInstruction {
 	long getExOperation() {
 		// cheat mode. feels wrong
 		RegisterMgr regs = RegisterMgr.getInstance();
-		int a = (int) regs.getFValue(opcode.getS());
+		int a = (int) regs.getFValue(opcode.getS()); // won't work with forwarding ):
 		int b = (int) regs.getFValue(opcode.getT());
 		Float af = Float.intBitsToFloat(a);
-		Float ab = Float.intBitsToFloat(b);
-		Float sum = af + ab;
+		Float bf = Float.intBitsToFloat(b);
+		Float sum = af + bf;
 		
 		return Float.floatToIntBits(sum);
 	}

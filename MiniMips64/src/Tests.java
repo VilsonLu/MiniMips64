@@ -22,11 +22,31 @@ public class Tests {
 //			new Tests().testImm();
 //			new Tests().testSignExtend();
 //			new Tests().testMemory();
-			new Tests().testPipeline();
+//			new Tests().testPipeline();
+			new Tests().testFloat();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	void testFloat() {
+		Float a = 3.0f;
+		Float b = 5.0f;
+		
+		// kunwari galing registers
+		long fs  =  0x2222_2222;
+		long ft = 0x1111_1111;
+		
+		Float fsfloat = Float.intBitsToFloat((int) fs);
+		Float ftfloat = Float.intBitsToFloat((int) ft);
+		
+		Float sum = fsfloat + ftfloat;
+		System.out.println(sum);
+		long result = (long) Float.floatToIntBits(sum);
+		
+		System.out.println("result: " + Long.toHexString(result));
+		System.out.println("long value: " + sum.longValue());
 	}
 	
 	

@@ -21,13 +21,18 @@ public class Pipeline {
 	private Instruction wb;
 	private Instruction[] fpadds;
 	private Instruction[] fpmults;
+
 	private long cycle = 0;
 	private boolean stall;
+	private boolean branchActive;
 	private Exec lastExec;
+	
+	
 	
 	private enum Exec {
 		EX, FP_ADD, FP_MULT
 	}
+	
 	
 	public Pipeline() {
 		fpadds = new Instruction[FP_ADD_CYCLES];
@@ -74,14 +79,23 @@ public class Pipeline {
 	
 	
 	public void performCycle() {
-		this.moveRegistersForward();
-		this.checkForStall();
-		this.runPipeline();
+		if (branchActive) {
+			
+		} else {
+			performDefaultCycle();
+		}
 		cycle++;
 	}
 	
 	
-	private void moveRegistersForward() {
+	private void performDefaultCycle() {
+		this.moveRegistersForward();
+		this.checkForStall();
+		this.runPipeline();
+	}
+	
+	
+	void moveRegistersForward() {
 		wb = mem;
 		
 		// move last executed instruction to MEM 
@@ -140,6 +154,28 @@ public class Pipeline {
 	}
 	
 	
+	Instruction getIF() {
+		return if_;
+	}
+	
+	void setIF(Instruction if_) {
+		this.if_ = if_;
+	}
+	
+	
+	Instruction getID() {
+		return id;
+	}
+	
+	void setID(Instruction id) {
+		this.id = id;
+	}
+	
+	
+	Instruction getEX() {
+		return ex;
+	}
+	
 	private void checkForStall() {
 		List<String> inputs = null;
 		stall = false;
@@ -179,7 +215,8 @@ public class Pipeline {
 		}
 	}
 	
-	private void runPipeline() {
+	
+	void runPipeline() {
 		if (wb != null) {
 			wb.wb();
 		}
@@ -261,7 +298,7 @@ public class Pipeline {
 	}
 	
 	
-	private Instruction getNextInstruction() {
+	protected Instruction getNextInstruction() {
 		RegisterMgr regs = RegisterMgr.getInstance();
 		long pc = regs.getPc();
 		InstructionMgr instructions = InstructionMgr.getInstance();
