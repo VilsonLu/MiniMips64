@@ -22,7 +22,7 @@ public class Helper {
 	
 	
 	public static String IntToBinary16(long number) {
-		return String.format("%16d", Long.parseLong(IntToBinary(number)));
+		return String.format("%016d", Long.parseLong(IntToBinary(number)));
 	}
 	
 	

@@ -70,8 +70,6 @@ public class MemoryMgr {
 		MemoryCell cell = segment.get(index);
 		cell.setByte(value, (int) location % MemoryCell.BYTES);
 		
-		System.out.println(index);
-		
 		if (listener != null) {
 			listener.memChanged(index, cell.getLong());
 		}

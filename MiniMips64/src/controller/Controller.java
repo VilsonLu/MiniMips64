@@ -9,6 +9,7 @@ import api.instruction.Instruction;
 import api.instruction.InstructionMgr;
 import api.instruction.alu.Daddu;
 import api.instruction.alu.Or;
+import api.instruction.branch.Beq;
 import api.memory.MemoryListener;
 import api.memory.MemoryMgr;
 import api.pipeline.Pipeline;
@@ -34,11 +35,15 @@ public class Controller {
 	
 	
 	private List<Instruction> getInstructions() {
-		Instruction a = new Daddu("4,1,2");
-		Instruction b = new Daddu("5,1,4");
+		Instruction a = new Daddu("3,1,2");
+		Instruction b = new Beq("1,3,1");
+		Instruction c = new Daddu("3,1,2");
+		Instruction d = new Or("3,1,2");
 		ArrayList<Instruction> list = new ArrayList<>();
 		list.add(a);
 		list.add(b);
+		list.add(c);
+		list.add(d);
 		
 		return list;
 	}
@@ -50,7 +55,6 @@ public class Controller {
 		InstructionMgr instructions = InstructionMgr.getInstance();
 		MemoryMgr mems = MemoryMgr.getInstance();
 		instructions.setInstructions(this.getInstructions());
-		
 		
 		ui.setInternalRegisters(regs.getInternalRegs());
 		mems.setListener(new MemListener());

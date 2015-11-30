@@ -90,8 +90,8 @@ public class Pipeline {
 	
 	private void performDefaultCycle() {
 		this.moveRegistersForward();
-		this.checkForStall();
 		this.runPipeline();
+		this.checkForStall();
 	}
 	
 	
@@ -194,9 +194,9 @@ public class Pipeline {
 		if (!stall && mem != null) {
 			stall = mem.outputsTo(inputs);
 		}
-		if (!stall && wb != null) {
-			stall = wb.outputsTo(inputs);
-		}
+//		if (!stall && wb != null) {
+//			stall = wb.outputsTo(inputs);
+//		}
 		if (!stall) {
 			for (int i = 0; i < FP_ADD_CYCLES; i++) {
 				Instruction fpadd = fpadds[i];

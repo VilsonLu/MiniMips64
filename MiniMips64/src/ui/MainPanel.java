@@ -34,7 +34,7 @@ public class MainPanel extends JPanel {
 		this.add(gptRegs);
 		this.add(internalRegs);
 		this.add(mems);
-		this.add(pipelineMap);
+		this.add(pipelineMap, "span");
 	}
 	
 	
