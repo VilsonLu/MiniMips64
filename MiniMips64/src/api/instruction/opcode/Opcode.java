@@ -8,7 +8,7 @@ public abstract class Opcode {
 	
 	private int rs;
 	private int rt;
-	private int destination;
+	private String destination;
 	
 	public abstract String getBinaryCode();
 	public abstract List<String> getInputs();
@@ -48,13 +48,13 @@ public abstract class Opcode {
 	}
 	
 	
-	public int getDestination() {
+	public String getDestination() {
 		return destination;
 	}
 	
 	
 	public void setDestination(String destination) {
-		this.destination = Integer.parseInt(destination);
+		this.destination = destination;
 	}
 	
 	

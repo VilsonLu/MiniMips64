@@ -83,8 +83,8 @@ public abstract class Instruction {
 	
 	public void id() {
 		RegisterMgr regs = RegisterMgr.getInstance();
-		long a = regs.getValue(opcode.getRs());
-		long b = regs.getValue(opcode.getRt());
+		long a = regs.getRValue(opcode.getRs());
+		long b = regs.getRValue(opcode.getRt());
 		long imm = opcode.getImm();
 		long ir = regs.getValue(RegisterMgr.IF_ID_IR);
 		long npc = regs.getValue(RegisterMgr.IF_ID_NPC);

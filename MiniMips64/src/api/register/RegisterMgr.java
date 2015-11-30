@@ -17,7 +17,8 @@ public class RegisterMgr {
 	
 	
 	private final int TOTAL_REGS = 32;
-	private List<RegisterCell> dataRegs;
+	private List<RegisterCell> rRegs;
+	private List<RegisterCell> fRegs;
 	private RegisterCell hi;
 	private RegisterCell lo;
 	private Map<String, RegisterCell> internalRegs;
@@ -44,10 +45,16 @@ public class RegisterMgr {
 	
 	
 	private RegisterMgr() {
-		dataRegs = new ArrayList<>();
+		rRegs = new ArrayList<>();
 		for (int i = 0; i < TOTAL_REGS; i++) {
-			dataRegs.add(new RegisterCell());
+			rRegs.add(new RegisterCell());
 		}
+		
+		fRegs = new ArrayList<>();
+		for (int i = 0; i < TOTAL_REGS; i++) {
+			fRegs.add(new RegisterCell());
+		}
+		
 		lo = new RegisterCell();
 		hi = new RegisterCell();
 		
@@ -87,28 +94,49 @@ public class RegisterMgr {
 	}
 	
 	
-	public long getValue(int index) {
-		return dataRegs.get(index).getValue();
+	public long getRValue(int index) {
+		return rRegs.get(index).getValue();
 	}
 	
 	
-	public void setValue(int index, long value) {
+	public void setRValue(int index, long value) {
 		if (index == 0) { 
 			return; 
 		}
-		dataRegs.get(index).setValue(value);
+		rRegs.get(index).setValue(value);
+	}
+	
+	
+	public long getFValue(int index) {
+		return fRegs.get(index).getValue();
+	}
+	
+	
+	public void setFValue(int index, long value) {
+		fRegs.get(index).setValue(value);
 	}
 	
 	
 	public void setValue(String key, long value) {
-		if (key.equals("hi")) {
+		if (key.startsWith("r")) {
+			int index = Integer.valueOf(key.substring(0, 1));
+			this.setRValue(index, value);
+		
+		} else if (key.startsWith("f")) {
+			int index = Integer.valueOf(key.substring(0, 1));
+			this.setFValue(index, value);
+		
+		} else if (key.equals("hi")) {
 			hi.setValue(value);
+		
 		} else if (key.equals("lo")){
 			lo.setValue(value);
+		
 		} else {
 			internalRegs.get(key).setValue(value);
 		}
 	}
+	
 	
 	public Map<String, Long> getInternalRegs() {
 		Map<String, Long> result = new HashMap<>();
@@ -118,6 +146,7 @@ public class RegisterMgr {
 		
 		return result;
 	}
+	
 	
 	public void incrementPc() {
 		RegisterCell pc = internalRegs.get(PC);

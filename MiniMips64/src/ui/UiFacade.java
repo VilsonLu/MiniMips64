@@ -18,8 +18,23 @@ public class UiFacade {
 	}
 	
 	
-	public void setRegister(int reg, long value) {
-		panel.setRegister(reg, value);
+	public void setR(int reg, long value) {
+		panel.setR(reg, value);
+	}
+
+	
+	public void setF(int reg, long value) {
+		panel.setF(reg, value);
+	}
+
+
+	public void setHi(long value) {
+		panel.setHi(value);
+	}
+
+	
+	public void setLo(long value) {
+		panel.setLo(value);
 	}
 
 	

@@ -14,7 +14,7 @@ public class Or extends AluInstruction {
 		opcode.setRd(registers[0]);
 		opcode.setRs(registers[1]);
 		opcode.setRt(registers[2]);
-		opcode.setDestination(registers[0]);
+		opcode.setDestination("r" + registers[0]);
 	}
 
 	@Override

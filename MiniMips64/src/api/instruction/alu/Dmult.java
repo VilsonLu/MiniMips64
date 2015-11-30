@@ -16,8 +16,7 @@ public class Dmult extends AluInstruction {
 		String registers[] = registerString.split(","); // rs, rt
 		opcode.setRs(registers[0]);
 		opcode.setRt(registers[1]);
-		opcode.setDestination("-1");
-		
+		opcode.setDestination("lo");
 	}
 
 	@Override
