@@ -33,7 +33,7 @@ public class Lwu extends LoadStoreInstruction {
 		long lmd = 0;
 		for (int i = 0; i < 4; i++) {
 			byte value = mems.get(location + i);
-			long converted = value << (i * 4) & 0xFFFF_FFFFL;
+			long converted = value << (i * 8) & 0xFFFF_FFFFL;
 			lmd = lmd + converted;
 		}
 		regs.setValue(RegisterMgr.MEM_WB_LMD, lmd);

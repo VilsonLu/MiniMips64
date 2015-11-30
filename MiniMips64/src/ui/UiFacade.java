@@ -45,8 +45,8 @@ public class UiFacade {
 	}
 	
 	
-	public void setMem(int index, long value) {
-		panel.setMem(index, value);
+	public void setDataMem(int index, long value) {
+		panel.setDataMem(index, value);
 	}
 	
 	

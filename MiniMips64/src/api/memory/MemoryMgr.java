@@ -5,21 +5,16 @@ import java.util.List;
 
 public class MemoryMgr {
 	private static MemoryMgr instance = new MemoryMgr();
-	
+	private MemoryListener listener;
 	
 	public static MemoryMgr getInstance() {
 		return instance;
 	}
 	
-	
 	private final long DATA_SEGMENT_START = 0x2000;
 	private final long DATA_SEGMENT_END = 0x4000;
 	private List<MemoryCell> codeSegment;
 	private List<MemoryCell> dataSegment;
-	
-	public static void main(String[] args) {
-		new MemoryMgr().test();
-	}
 	
 	
 	public long getDataSegmentStart() {
@@ -27,15 +22,15 @@ public class MemoryMgr {
 	}
 	
 	
+	public void setListener(MemoryListener listener) {
+		this.listener = listener;
+	}
+	
 	public int totalDataSegments() {
 		return (int) (DATA_SEGMENT_END - DATA_SEGMENT_START) / MemoryCell.BYTES;
 	}
 	
-	
-	private void test() {
-		
-	}
-	
+
 	
 	public MemoryMgr() {
 		codeSegment = new ArrayList<>();
@@ -48,7 +43,7 @@ public class MemoryMgr {
 		dataSegment = new ArrayList<>();
 		long dataSegmentCells = this.totalDataSegments();
 		for (int i = 0; i < dataSegmentCells; i++) {
-			codeSegment.add(new MemoryCell());
+			dataSegment.add(new MemoryCell());
 		}
 	}
 	
@@ -64,13 +59,21 @@ public class MemoryMgr {
 	
 	
 	public void set(long location, byte value) {
-		List<MemoryCell> segment = dataSegment;
+		List<MemoryCell> segment = codeSegment;
 		
-		if (location < DATA_SEGMENT_START) {
-			segment = codeSegment;
+		if (location >= DATA_SEGMENT_START) {
+			segment = dataSegment;
+			location -= DATA_SEGMENT_START;
 		}
 		
-		MemoryCell cell = segment.get((int) location / MemoryCell.BYTES);
+		int index = (int) location / MemoryCell.BYTES;
+		MemoryCell cell = segment.get(index);
 		cell.setByte(value, (int) location % MemoryCell.BYTES);
+		
+		System.out.println(index);
+		
+		if (listener != null) {
+			listener.memChanged(index, cell.getLong());
+		}
 	}
 }

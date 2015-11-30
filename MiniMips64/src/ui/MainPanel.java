@@ -62,7 +62,7 @@ public class MainPanel extends JPanel {
 	}
 	
 	
-	void setMem(int index, long value) {
+	void setDataMem(int index, long value) {
 		mems.setCell(index, value);
 	}
 	

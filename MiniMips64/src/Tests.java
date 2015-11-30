@@ -23,11 +23,24 @@ public class Tests {
 //			new Tests().testSignExtend();
 //			new Tests().testMemory();
 //			new Tests().testPipeline();
-			new Tests().testFloat();
+//			new Tests().testFloat();
+			new Tests().testMem();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	
+	void testMem() {
+		byte[] values = new byte[] {1, 2, 3, 4};
+		long value = 0;
+		for (int i = 0; i < 4; i++) {
+			value = value << 8;
+			byte b = values[i];
+			value += b;
+		}
+		System.out.println(Long.toHexString(value));
 	}
 	
 	void testFloat() {
