@@ -15,6 +15,7 @@ public class Lwu extends LoadStoreInstruction {
 		opcode.setRt(registers[0]);
 		opcode.setImm(registers[1]);
 		opcode.setRs(registers[2]);
+		opcode.setDestination("r" + registers[0]);
 		System.out.println(opcode.getBinaryCode());
 	}
 	

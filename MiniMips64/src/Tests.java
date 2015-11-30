@@ -26,7 +26,8 @@ public class Tests {
 //			new Tests().testPipeline();
 //			new Tests().testFloat();
 //			new Tests().testMem();
-			new Tests().testBigInt();
+			new Tests().testMemStore();
+//			new Tests().testBigInt();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,6 +50,21 @@ public class Tests {
 		System.out.println(Long.toHexString(hi));
 		System.out.println(Long.toHexString(lo));
 	}
+	
+	void testMemStore() {
+		byte[] values = new byte[4];
+		long alu = 0x04030201;
+		for (int i = 0; i < 4; i++) {
+			 byte value = (byte) ((byte) alu % 0x100);
+			 alu = alu / 0x100;
+			 values[i] = value;
+		}
+		for (int i = 0; i < 4; i++) {
+			System.out.println(values[i]);
+		}
+		
+	}
+	
 	
 	
 	void testMem() {
