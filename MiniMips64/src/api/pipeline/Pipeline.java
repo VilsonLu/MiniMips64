@@ -8,6 +8,7 @@ import api.instruction.Instruction;
 import api.instruction.InstructionMgr;
 import api.instruction.alu.AddS;
 import api.instruction.alu.MulS;
+import api.instruction.branch.BranchInstruction;
 import api.register.RegisterMgr;
 
 public class Pipeline {
@@ -23,7 +24,7 @@ public class Pipeline {
 	private Instruction[] fpmults;
 
 	private long cycle = 0;
-	private boolean stall;
+	private boolean stall = false;
 	private boolean branchActive;
 	private Exec lastExec = Exec.EX;
 	private BranchStrategy strategy;
@@ -40,37 +41,38 @@ public class Pipeline {
 	
 	
 	public void printContents() {
+		System.out.println("-------");
 		System.out.print("IF: ");
 		if (if_ != null) {
-			System.out.println(if_.getStringCode());
+			System.out.println(if_.getStringCode() + ": " + if_.getId());
 		} else {
 			System.out.println();
 		}
 		
 		System.out.print("ID: ");
 		if (id != null) {
-			System.out.println(id.getStringCode());
+			System.out.println(id.getStringCode() + ": " + id.getId());
 		} else {
 			System.out.println();
 		}
 		
 		System.out.print("EX: ");
 		if (ex != null) {
-			System.out.println(ex.getStringCode());
+			System.out.println(ex.getStringCode() + ": " + ex.getId());
 		} else {
 			System.out.println();
 		}
 		
 		System.out.print("MEM: ");
 		if (mem != null) {
-			System.out.println(mem.getStringCode());
+			System.out.println(mem.getStringCode() + ": " + mem.getId());
 		} else {
 			System.out.println();
 		}
 		
 		System.out.print("WB: ");
 		if (wb != null) {
-			System.out.println(wb.getStringCode());
+			System.out.println(wb.getStringCode() + ": " + wb.getId());
 		} else {
 			System.out.println();
 		}
@@ -78,6 +80,9 @@ public class Pipeline {
 	
 	
 	public void performCycle() {
+		RegisterMgr regs = RegisterMgr.getInstance();
+		regs.cloneInternalRegs();
+		
 		if (branchActive) {
 			this.performBranchCycle();
 		} else {
@@ -94,10 +99,13 @@ public class Pipeline {
 		strategy.propagate();
 		if (strategy.isDone()) {
 			strategy = null;
+			stall = false;
+			branchActive = false;
 		} 
 	}
 	
-	private void performDefaultCycle() {
+	
+	void performDefaultCycle() {
 		this.moveRegistersForward();
 		this.runPipeline();
 		this.checkForStall();
@@ -157,8 +165,14 @@ public class Pipeline {
 			
 			if (!stall) {
 				id = if_;
-				if_ = this.getNextInstruction();	
+				if_ = this.getNextInstruction();
+				if (id instanceof BranchInstruction && !branchActive) {
+					branchActive = true;
+					return;
+				} 
 			}
+		} else if (branchActive) {
+			ex = id; 
 		}
 	}
 	
@@ -182,13 +196,21 @@ public class Pipeline {
 		this.id = id;
 	}
 	
+	Instruction getEx() {
+		return ex;
+	}
 	
-	Instruction getWB() {
+	
+	Instruction getMem() {
+		return mem;
+	}
+	
+	Instruction getWb() {
 		return wb;
 	}
 	
 	
-	private void checkForStall() {
+	void checkForStall() {
 		List<String> inputs = null;
 		stall = false;
 		if (id != null) {
@@ -229,12 +251,14 @@ public class Pipeline {
 	
 	
 	void runPipeline() {
-		if (wb != null) {
-			wb.wb();
+		if (if_ != null && !stall) {
+			if_.ife();
 		}
-		if (mem != null) {
-			mem.mem();	
+	
+		if (id != null && !stall) {
+			id.id();
 		}
+		
 		
 		// check which Exec will execute based on Instruction id
 		Exec toExecute = Exec.EX;
@@ -262,13 +286,17 @@ public class Pipeline {
 			fpmultLast.ex();
 		}
 		
-		if (id != null && !stall) {
-			id.id();
+		
+		if (mem != null) {
+			mem.mem();	
 		}
-		if (if_ != null && !stall) {
-			if_.ife();
+		
+		
+		if (wb != null) {
+			wb.wb();
 		}
-	
+		
+		
 		lastExec = toExecute;
 	}
 	

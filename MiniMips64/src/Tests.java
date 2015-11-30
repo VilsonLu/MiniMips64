@@ -23,8 +23,8 @@ public class Tests {
 //			new Tests().testSignExtend();
 //			new Tests().testMemory();
 //			new Tests().testPipeline();
-//			new Tests().testFloat();
-			new Tests().testMem();
+			new Tests().testFloat();
+//			new Tests().testMem();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -48,8 +48,8 @@ public class Tests {
 		Float b = 5.0f;
 		
 		// kunwari galing registers
-		long fs  =  0x2222_2222;
-		long ft = 0x1111_1111;
+		long fs  =  Float.floatToIntBits(a);
+		long ft = Float.floatToIntBits(b); 
 		
 		Float fsfloat = Float.intBitsToFloat((int) fs);
 		Float ftfloat = Float.intBitsToFloat((int) ft);
@@ -59,7 +59,6 @@ public class Tests {
 		long result = (long) Float.floatToIntBits(sum);
 		
 		System.out.println("result: " + Long.toHexString(result));
-		System.out.println("long value: " + sum.longValue());
 	}
 	
 	

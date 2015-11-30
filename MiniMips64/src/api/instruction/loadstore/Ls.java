@@ -30,7 +30,7 @@ public class Ls extends LoadStoreInstruction {
 	public void mem() {
 		MemoryMgr mems = MemoryMgr.getInstance();
 		RegisterMgr regs = RegisterMgr.getInstance();
-		long location = regs.getValue(RegisterMgr.EX_MEM_ALUOUTPUT);
+		long location = regs.getOldValue(RegisterMgr.EX_MEM_ALUOUTPUT);
 		long lmd = 0;
 		for (int i = 0; i < 4; i++) {
 			byte value = mems.get(location + i);
@@ -43,7 +43,7 @@ public class Ls extends LoadStoreInstruction {
 	@Override
 	public void wb() {
 		RegisterMgr regs = RegisterMgr.getInstance();
-		long value = regs.getValue(RegisterMgr.MEM_WB_LMD);
+		long value = regs.getOldValue(RegisterMgr.MEM_WB_LMD);
 		regs.setValue(opcode.getDestination(), value);
 	}
 }

@@ -100,6 +100,24 @@ public class RegisterMgr {
 	}
 	
 	
+	private Map<String, RegisterCell> oldInternalRegs;
+	
+	public void cloneInternalRegs() {
+		oldInternalRegs = new HashMap<>();
+		for (String key : internalRegs.keySet()) {
+			long value = internalRegs.get(key).getValue();
+			RegisterCell cell = new RegisterCell();
+			cell.setValue(value);
+			oldInternalRegs.put(key, cell);
+		}
+	}
+	
+	public long getOldValue(String key) {
+		return oldInternalRegs.get(key).getValue();
+	}
+	
+	
+	
 	public long getRValue(int index) {
 		return rRegs.get(index).getValue();
 	}
@@ -121,6 +139,7 @@ public class RegisterMgr {
 	public void setFValue(int index, long value) {
 		fRegs.get(index).setValue(value);
 	}
+	
 	
 	
 	public void setValue(String key, long value) {
@@ -185,12 +204,12 @@ public class RegisterMgr {
 	}
 	
 	
-	public boolean exMemCodeIsBranch() {
+	public boolean exMemCodeWasBranch() {
 		return exMemCodeIsBranch;
 	}
 	
 	
-	public void setExMemCodeIsBranch(boolean value) {
+	public void setExMemCodeWasBranch(boolean value) {
 		exMemCodeIsBranch = value;
 	}
 }

@@ -17,7 +17,7 @@ public abstract class BranchStrategy {
 	
 	private boolean isDone;
 	private Pipeline pipeline;
-	private boolean willBranch;
+	private boolean willBranch = false;
 	
 	
 	public BranchStrategy(Pipeline pipeline) {
@@ -35,12 +35,21 @@ public abstract class BranchStrategy {
 	}
 	
 	void propagate() {
-		Instruction wb = pipeline.getWB();
-		if (wb != null && wb instanceof BranchInstruction) {
-			isDone = true;
+		pipeline.moveRegistersForward();
+		
+		Instruction mem = pipeline.getMem();
+		if (mem != null && mem instanceof BranchInstruction) {
 			RegisterMgr regs = RegisterMgr.getInstance();
 			long cond = regs.getValue(RegisterMgr.EX_MEM_COND);
 			if (cond == 1) {
+				willBranch = true;
+			}
+		}
+		
+		Instruction wb = pipeline.getWb();
+		if (wb != null && wb instanceof BranchInstruction) {
+			isDone = true;
+			if (willBranch) {
 				doneBranch();
 			} else {
 				doneNotBranch();

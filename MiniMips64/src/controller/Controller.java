@@ -35,15 +35,19 @@ public class Controller {
 	
 	
 	private List<Instruction> getInstructions() {
-		Instruction a = new Daddu("3,1,2");
-		Instruction b = new Beq("1,3,1");
+		//Instruction a = new Daddu("3,1,2");
+		Instruction b = new Beq("1,2,3");
 		Instruction c = new Daddu("3,1,2");
 		Instruction d = new Or("3,1,2");
+		Instruction e = new Daddu("5,6,7");
+		Instruction f = new Or("8,9,10");
 		ArrayList<Instruction> list = new ArrayList<>();
-		list.add(a);
+		//list.add(a);
 		list.add(b);
 		list.add(c);
 		list.add(d);
+		list.add(e);
+		list.add(f);
 		
 		return list;
 	}

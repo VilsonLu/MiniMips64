@@ -71,8 +71,8 @@ public abstract class Instruction {
 		regs.setValue(RegisterMgr.IF_ID_IR, ir);
 		
 		long npcValue;
-		if (regs.exMemCodeIsBranch() && regs.getValue(RegisterMgr.EX_MEM_COND) == 0) {
-			npcValue = regs.getValue(RegisterMgr.EX_MEM_ALUOUTPUT);
+		if (regs.exMemCodeWasBranch() && regs.getOldValue(RegisterMgr.EX_MEM_COND) == 1) {
+			npcValue = regs.getOldValue(RegisterMgr.EX_MEM_ALUOUTPUT);
 		} else {
 			npcValue = regs.getPc() + 4;
 		}
@@ -86,8 +86,8 @@ public abstract class Instruction {
 		long a = regs.getRValue(opcode.getRs());
 		long b = regs.getRValue(opcode.getRt());
 		long imm = opcode.getImm();
-		long ir = regs.getValue(RegisterMgr.IF_ID_IR);
-		long npc = regs.getValue(RegisterMgr.IF_ID_NPC);
+		long ir = regs.getOldValue(RegisterMgr.IF_ID_IR);
+		long npc = regs.getOldValue(RegisterMgr.IF_ID_NPC);
 
 		regs.setValue(RegisterMgr.ID_EX_A, a);
 		regs.setValue(RegisterMgr.ID_EX_B, b);
