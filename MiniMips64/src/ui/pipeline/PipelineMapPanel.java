@@ -1,5 +1,6 @@
 package ui.pipeline;
 
+import java.awt.Rectangle;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,6 +90,8 @@ public class PipelineMapPanel extends JPanel {
 			model.setValueAt(pipeline.get(instruction), row - 1, cycle);
 		}		
 		table.getColumnModel().getColumn(0).setMinWidth(INSTRUCTION_WIDTH);
+		// table.getSelectionModel().setSelectionInterval(model.getRowCount() - 1, model.getRowCount() - 1);
+		table.scrollRectToVisible(new Rectangle(table.getCellRect(model.getRowCount() - 1, cycle, true)));
 	}
 	
 	

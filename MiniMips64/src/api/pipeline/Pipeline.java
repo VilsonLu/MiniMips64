@@ -26,8 +26,7 @@ public class Pipeline {
 	private boolean stall;
 	private boolean branchActive;
 	private Exec lastExec = Exec.EX;
-	
-	
+	private BranchStrategy strategy;
 	
 	private enum Exec {
 		EX, FP_ADD, FP_MULT
@@ -80,13 +79,23 @@ public class Pipeline {
 	
 	public void performCycle() {
 		if (branchActive) {
-			
+			this.performBranchCycle();
 		} else {
-			performDefaultCycle();
+			this.performDefaultCycle();
 		}
 		cycle++;
 	}
 	
+	
+	private void performBranchCycle() {
+		if (strategy == null) {
+			strategy = new PipelineFlush(this);
+		}
+		strategy.propagate();
+		if (strategy.isDone()) {
+			strategy = null;
+		} 
+	}
 	
 	private void performDefaultCycle() {
 		this.moveRegistersForward();
@@ -174,8 +183,8 @@ public class Pipeline {
 	}
 	
 	
-	Instruction getEX() {
-		return ex;
+	Instruction getWB() {
+		return wb;
 	}
 	
 	

@@ -15,16 +15,9 @@ public abstract class BranchStrategy {
 	}
 	
 	
-	private boolean isDoneChecking;
+	private boolean isDone;
 	private Pipeline pipeline;
 	private boolean willBranch;
-	
-	// internal pipeline
-	protected Instruction if_;
-	protected Instruction id;
-	protected Instruction ex;
-	protected Instruction mem; 
-	protected Instruction wb;
 	
 	
 	public BranchStrategy(Pipeline pipeline) {
@@ -32,8 +25,8 @@ public abstract class BranchStrategy {
 	}
 	
 	
-	public boolean isDoneChecking() {
-		return isDoneChecking;
+	public boolean isDone() {
+		return isDone;
 	}
 	
 	
@@ -41,16 +34,19 @@ public abstract class BranchStrategy {
 		return willBranch;
 	}
 	
-	
-	protected void checkIfWillBranch() {
-		Instruction ex = pipeline.getEX();
-		if (ex instanceof BranchInstruction) {
-			isDoneChecking = true;
+	void propagate() {
+		Instruction wb = pipeline.getWB();
+		if (wb != null && wb instanceof BranchInstruction) {
+			isDone = true;
 			RegisterMgr regs = RegisterMgr.getInstance();
 			long cond = regs.getValue(RegisterMgr.EX_MEM_COND);
-			if (cond == 0) {
-				willBranch = true;
+			if (cond == 1) {
+				doneBranch();
+			} else {
+				doneNotBranch();
 			}
+		} else {
+			this.notDone();
 		}
 	}
 
@@ -59,7 +55,7 @@ public abstract class BranchStrategy {
 		return pipeline;
 	}
 	
-	abstract void propagate();
-	abstract void performWillBranch();
-	abstract void performWillNotBranch();
+	abstract void notDone();
+	abstract void doneBranch();
+	abstract void doneNotBranch();
 }

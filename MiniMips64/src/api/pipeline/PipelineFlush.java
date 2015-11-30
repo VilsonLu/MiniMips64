@@ -11,7 +11,7 @@ public class PipelineFlush extends BranchStrategy {
 
 	
 	@Override
-	void propagate() {
+	void notDone() {
 		Pipeline pipeline = this.getPipeline();
 		pipeline.moveRegistersForward();
 		
@@ -21,19 +21,19 @@ public class PipelineFlush extends BranchStrategy {
 		}
 		pipeline.runPipeline();
 		
-		this.checkIfWillBranch();
-	}
-
-
-	@Override
-	void performWillBranch() {
 		
 	}
 
 
 	@Override
-	void performWillNotBranch() {
-		
+	void doneBranch() {
+		this.notDone();
+	}
+
+
+	@Override
+	void doneNotBranch() {
+		this.notDone();
 	}
 
 }
