@@ -3,6 +3,8 @@ package ui;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
+import api.instruction.Instruction;
+
 public class UiFacade {
 	MainPanel panel;
 	
@@ -50,5 +52,10 @@ public class UiFacade {
 	
 	public void addOneCycleButtonListener(ActionListener listener) {
 		panel.addOneCycleButtonListener(listener);
+	}
+	
+	
+	public void updatePipelineMap(Map<Instruction, String> pipeline) {
+		panel.updatePipelineMap(pipeline);
 	}
 }

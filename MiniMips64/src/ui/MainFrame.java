@@ -35,7 +35,7 @@ public class MainFrame extends JFrame {
         
         
         setTitle("MiniMips64");
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(1024, 768));
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(true);

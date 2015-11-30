@@ -27,6 +27,7 @@ public class Controller {
 		regs.setRValue(3, 6);
 	}
 	
+	
 	private List<Instruction> getInstructions() {
 		Instruction a = new Daddu("4,1,2");
 		Instruction b = new Or("5,2,3");
@@ -37,13 +38,15 @@ public class Controller {
 		return list;
 	}
 	
+	
 	public Controller() {
 		ui.addOneCycleButtonListener(new OneCycleListener());
 		RegisterMgr regs = RegisterMgr.getInstance();
 		InstructionMgr instructions = InstructionMgr.getInstance();
 		instructions.setInstructions(this.getInstructions());
 		
-		ui.setInternalRegisters(regs.getInternalRegs());
+		
+		ui.setInternalRegisters(regs.getInternalRegs()); 
 		regs.setListener(new RegListener());
 	}
 	
@@ -71,14 +74,18 @@ public class Controller {
 		}
 	}
 	
-	private class OneCycleListener implements ActionListener {
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			pipeline.performCycle();
-			RegisterMgr regs = RegisterMgr.getInstance();
-			ui.setInternalRegisters( regs.getInternalRegs() );
-		}
+	private void runOneCycle() {
+		pipeline.performCycle();
+		RegisterMgr regs = RegisterMgr.getInstance();
+		ui.setInternalRegisters( regs.getInternalRegs() );
+		ui.updatePipelineMap( pipeline.getInstructionPipelines() );
 	}
 	
 	
+	private class OneCycleListener implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			Controller.this.runOneCycle();
+		}
+	}
 }

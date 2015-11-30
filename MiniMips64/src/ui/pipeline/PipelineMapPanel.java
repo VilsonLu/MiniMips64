@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,7 +23,8 @@ public class PipelineMapPanel extends JPanel {
 	private int lastRow = 0;
 	private int cycle = 0;
 	private Map<Integer, Integer> instructionRowCache = new HashMap<>();
-	private JTable pipelineTable;
+	private JTable table;
+	private JScrollPane scrollPane;
 	private boolean newRowAdded = false;
 	
 	public PipelineMapPanel() {
@@ -31,6 +33,7 @@ public class PipelineMapPanel extends JPanel {
 	
 	
 	public static void main(String[] args) {
+		
 		MainFrame frame = new MainFrame();
 		PipelineMapPanel panel = new PipelineMapPanel();
 		frame.setPanel(panel);
@@ -61,11 +64,17 @@ public class PipelineMapPanel extends JPanel {
 	
 	private void initComponents() {
 		this.setLayout(new MigLayout("wrap 1"));
-		model = new DefaultTableModel(1, 1);
+		model = new DefaultTableModel(0, 1);
 		
-		pipelineTable = new JTable(model);
-		pipelineTable.getColumnModel().getColumn(0).setMinWidth(INSTRUCTION_WIDTH);
-		this.add(pipelineTable);
+		table = new JTable(model);
+		
+		
+		table.getColumnModel().getColumn(0).setMinWidth(INSTRUCTION_WIDTH);
+		scrollPane = new JScrollPane(table);
+		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		table.setAutoResizeMode( JTable.AUTO_RESIZE_OFF );
+		this.add(scrollPane);
+		
 	}
 	
 	
@@ -77,13 +86,9 @@ public class PipelineMapPanel extends JPanel {
 			if (newRowAdded) {
 				model.addRow(new String[] {instruction.getStringCode()});
 			}
-			model.setValueAt(pipeline.get(instruction), row, cycle);
-		}
-		model.setValueAt(cycle, 0, cycle);
-		
-		pipelineTable.getColumnModel().getColumn(0).setMinWidth(INSTRUCTION_WIDTH);
-		
-		// pipelineTable.getColumnModel().getColumn(cycle).setPreferredWidth(PIPELINE_WIDTH);
+			model.setValueAt(pipeline.get(instruction), row - 1, cycle);
+		}		
+		table.getColumnModel().getColumn(0).setMinWidth(INSTRUCTION_WIDTH);
 	}
 	
 	

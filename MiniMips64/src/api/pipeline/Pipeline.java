@@ -158,6 +158,7 @@ public class Pipeline {
 		return if_;
 	}
 	
+	
 	void setIF(Instruction if_) {
 		this.if_ = if_;
 	}
@@ -167,6 +168,7 @@ public class Pipeline {
 		return id;
 	}
 	
+	
 	void setID(Instruction id) {
 		this.id = id;
 	}
@@ -175,6 +177,7 @@ public class Pipeline {
 	Instruction getEX() {
 		return ex;
 	}
+	
 	
 	private void checkForStall() {
 		List<String> inputs = null;
