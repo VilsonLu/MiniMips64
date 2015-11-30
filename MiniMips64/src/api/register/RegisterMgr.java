@@ -117,11 +117,21 @@ public class RegisterMgr {
 	}
 	
 	
-	public void setValue(String key, long value) {	
-		if (key.equals("hi")) {
+	public void setValue(String key, long value) {
+		if (key.startsWith("r")) {
+			int index = Integer.valueOf(key.substring(0, 1));
+			this.setRValue(index, value);
+		
+		} else if (key.startsWith("f")) {
+			int index = Integer.valueOf(key.substring(0, 1));
+			this.setFValue(index, value);
+		
+		} else if (key.equals("hi")) {
 			hi.setValue(value);
+		
 		} else if (key.equals("lo")){
 			lo.setValue(value);
+		
 		} else {
 			internalRegs.get(key).setValue(value);
 		}

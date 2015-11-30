@@ -36,6 +36,6 @@ public abstract class AluInstruction extends Instruction {
 	public void wb() {
 		RegisterMgr regs = RegisterMgr.getInstance();
 		long aluoutput = regs.getValue(RegisterMgr.MEM_WB_ALUOUTPUT);
-		regs.setRValue(this.getOpcode().getDestination(), aluoutput);	
+		regs.setValue(this.getOpcode().getDestination(), aluoutput);	
 	}
 }
