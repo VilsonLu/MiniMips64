@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -23,12 +24,30 @@ public class Tests {
 //			new Tests().testSignExtend();
 //			new Tests().testMemory();
 //			new Tests().testPipeline();
-			new Tests().testFloat();
+//			new Tests().testFloat();
 //			new Tests().testMem();
+			new Tests().testBigInt();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	void testBigInt() {
+		long a = 0x7FFFFFFF;
+		long b = 0x7FFFFFFF;
+		BigInteger bigA = new BigInteger(Long.toString(a));
+		BigInteger bigB = new BigInteger(Long.toString(b));
+		BigInteger sum = bigA.multiply(bigB);
+		BigInteger divisor = new BigInteger("100000000", 16);
+		BigInteger bigHi = sum.divide(divisor);
+		BigInteger bigLo = sum.mod(divisor);
+		
+		long hi = bigHi.longValue();
+		long lo = bigLo.longValue();
+		
+		System.out.println(Long.toHexString(hi));
+		System.out.println(Long.toHexString(lo));
 	}
 	
 	

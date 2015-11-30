@@ -16,11 +16,12 @@ public final class InstructionUtil {
 		MipsExceptionList exceptionList = new MipsExceptionList();
 		for (int i = 0; i < registers.length; i++) {
 			String register = registers[i]; 
-			Pattern p = Pattern.compile("r[0-9]{1,2}");
+			Pattern p = Pattern.compile("[r,f][0-9]{1,2}");
 			Matcher m = p.matcher(register);
 			
 			if (m.matches()) {
 				register = register.replace("r", "");
+				register = register.replace("f", "");
 				int number = Integer.parseInt(register);
 				if (number >= 0 && number < 32) {
 					registers[i] = Integer.toString(number);

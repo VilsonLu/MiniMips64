@@ -19,10 +19,6 @@ public class Lwu extends LoadStoreInstruction {
 	}
 	
 	
-	public static void main(String[] args) {
-		
-	}
-	
 	@Override
 	public String getStringCode() {
 		return opcode.getStringCodeRegOffsetReg();

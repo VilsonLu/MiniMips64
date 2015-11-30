@@ -140,8 +140,7 @@ public class RegisterMgr {
 		fRegs.get(index).setValue(value);
 	}
 	
-	
-	
+
 	public void setValue(String key, long value) {
 		if (key.startsWith("r")) {
 			int index = Integer.valueOf(key.substring(1));

@@ -14,23 +14,27 @@ public class InstructionFactory {
 		String[] splitLine = line.split(" ", 2);
 		
 		String arguments = splitLine[1];
-		arguments = InstructionUtil.formatRegisters(arguments);
+		
 		
 		Instruction instruction = null;
 		switch (splitLine[0].toLowerCase()) {
 		// R-type
 		case "daddu":
+			arguments = InstructionUtil.formatRegisters(arguments);
 			instruction = new Daddu(arguments);
 			break;
 		case "dmult":
+			arguments = InstructionUtil.formatRegisters(arguments);
 			instruction = new Dmult(arguments);
 			break;
 		case "or":
+			arguments = InstructionUtil.formatRegisters(arguments);
 			instruction = new Or(arguments);
 			break;
 			
 		// I-type
 		case "beq":
+			arguments = InstructionUtil.formatRegisterOffset(arguments);
 			instruction = new Beq(arguments);
 			break;
 			
