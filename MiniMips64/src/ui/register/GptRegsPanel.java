@@ -33,17 +33,20 @@ public class GptRegsPanel extends JPanel {
 	
 	private void initComponents() {
 		this.setLayout(new MigLayout("wrap 1"));
-		model = new DefaultTableModel(17, 4);
+		model = new DefaultTableModel(34, 4);
 		
-		int col = 0;
-		for (int i = 0; i < 32; i++) {
-			int row = i % 16;
-			if (i == 16) {
-				col = 2;
-			}
-			model.setValueAt("r"+ i, row, col);
-			model.setValueAt("0000 0000 0000 0000", row, col + 1);
+		for (int row = 0; row < 32; row++) {
+			model.setValueAt("r"+ row, row, 0);
+			model.setValueAt("0000 0000 0000 0000", row, 1);
+			
+			model.setValueAt("f"+ row, row, 2);
+			model.setValueAt("0000 0000 0000 0000", row,  3);
 		}
+		model.setValueAt("hi", 32, 0);
+		model.setValueAt("0000 0000 0000 0000", 32, 1);
+		model.setValueAt("lo", 33, 0);
+		model.setValueAt("0000 0000 0000 0000", 33, 1);
+		
 		
 		JTable regsTable = new JTable(model);
 		regsTable.getColumnModel().getColumn(0).setPreferredWidth(REG_LABEL_WIDTH);
@@ -61,12 +64,23 @@ public class GptRegsPanel extends JPanel {
 	}
 	
 	
-	public void setRegister(int reg, long value) {
-		int row = reg % 16;
-		int col = 1;
-		if (reg >= 16) {
-			col = 3;
-		}
-		model.setValueAt(Helper.prettifyHex(value, 16), row, col);		
+	public void setR(int reg, long value) {
+		model.setValueAt(Helper.prettifyHex(value, 16), reg, 1);		
 	}
+	
+	
+	public void setF(int reg, long value) {
+		model.setValueAt(Helper.prettifyHex(value, 16), reg, 3);		
+	}
+	
+	
+	public void setHi(long value) {
+		model.setValueAt(Helper.prettifyHex(value, 16), 32, 3);
+	}
+	
+	
+	public void setLo(long value) {
+		model.setValueAt(Helper.prettifyHex(value, 16), 33, 3);
+	}
+	
 }

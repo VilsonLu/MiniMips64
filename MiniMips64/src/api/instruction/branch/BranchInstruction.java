@@ -10,18 +10,24 @@ public abstract class BranchInstruction extends Instruction {
 	
 	public void ex() {
 		RegisterMgr regs = RegisterMgr.getInstance();
-		regs.setExMemCodeIsBranch(true);
-		
-		long aluoutput = regs.getValue(RegisterMgr.ID_EX_NPC) + regs.getValue(RegisterMgr.ID_EX_IMM) * 4;
-		long ir = regs.getValue(RegisterMgr.ID_EX_IR);
+		regs.setExMemCodeWasBranch(true);
+		long aluoutput = regs.getOldValue(RegisterMgr.ID_EX_NPC) + regs.getOldValue(RegisterMgr.ID_EX_IMM) * 4;
+		long ir = regs.getOldValue(RegisterMgr.ID_EX_IR);
 		regs.setValue(RegisterMgr.EX_MEM_IR, ir);
-		regs.setValue(RegisterMgr.EX_MEM_COND, 0);
+		regs.setValue(RegisterMgr.EX_MEM_COND, this.getExOperation());
 		regs.setValue(RegisterMgr.EX_MEM_ALUOUTPUT, aluoutput);
 	}
 	
-	public void mem() {}
 	
+	public void mem() {
+		RegisterMgr regs = RegisterMgr.getInstance();
+		regs.setValue(RegisterMgr.EX_MEM_COND, 0);
+	}
+	
+	
+	@Override
 	public void wb() {}
+	
 	
 	abstract long getExOperation();
 }

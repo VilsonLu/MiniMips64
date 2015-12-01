@@ -3,6 +3,8 @@ package ui;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
+import api.instruction.Instruction;
+
 public class UiFacade {
 	MainPanel panel;
 	
@@ -18,8 +20,23 @@ public class UiFacade {
 	}
 	
 	
-	public void setRegister(int reg, long value) {
-		panel.setRegister(reg, value);
+	public void setR(int reg, long value) {
+		panel.setR(reg, value);
+	}
+
+	
+	public void setF(int reg, long value) {
+		panel.setF(reg, value);
+	}
+
+
+	public void setHi(long value) {
+		panel.setHi(value);
+	}
+
+	
+	public void setLo(long value) {
+		panel.setLo(value);
 	}
 
 	
@@ -28,12 +45,17 @@ public class UiFacade {
 	}
 	
 	
-	public void setMem(int index, long value) {
-		panel.setMem(index, value);
+	public void setDataMem(int index, long value) {
+		panel.setDataMem(index, value);
 	}
 	
 	
 	public void addOneCycleButtonListener(ActionListener listener) {
 		panel.addOneCycleButtonListener(listener);
+	}
+	
+	
+	public void updatePipelineMap(Map<Instruction, String> pipeline) {
+		panel.updatePipelineMap(pipeline);
 	}
 }

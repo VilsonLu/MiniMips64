@@ -4,12 +4,12 @@ import api.instruction.opcode.Itype;
 import api.memory.MemoryMgr;
 import api.register.RegisterMgr;
 
-public class Lw extends LoadStoreInstruction {
-	private Itype opcode;
+public class Lwu extends LoadStoreInstruction {
+	private Itype opcode; 
 	
-	public Lw(String registerString) {
+	public Lwu(String registerString) {
 		super();
-		opcode = new Itype("LW", 35);
+		opcode = new Itype("LWU", 37);
 		this.setOpcode(opcode);
 		String registers[] = registerString.split(","); // rd, offset, rs
 		opcode.setRt(registers[0]);
@@ -25,7 +25,7 @@ public class Lw extends LoadStoreInstruction {
 		return opcode.getStringCodeRegOffsetReg();
 	}
 
-	
+
 	@Override
 	public void mem() {
 		MemoryMgr mems = MemoryMgr.getInstance();
@@ -34,11 +34,10 @@ public class Lw extends LoadStoreInstruction {
 		long lmd = 0;
 		for (int i = 0; i < 4; i++) {
 			byte value = mems.get(location + i);
-			long converted = value << (i * 8);
+			long converted = value << (i * 8) & 0xFFFF_FFFFL;
 			lmd = lmd + converted;
 		}
 		regs.setValue(RegisterMgr.MEM_WB_LMD, lmd);
-
 	}
 
 	

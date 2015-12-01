@@ -3,6 +3,7 @@ package api.instruction.branch;
 import java.util.ArrayList;
 import java.util.List;
 
+import api.instruction.Instruction;
 import api.instruction.opcode.Itype;
 import api.register.RegisterMgr;
 

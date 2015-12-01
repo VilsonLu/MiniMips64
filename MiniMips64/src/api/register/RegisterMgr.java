@@ -17,7 +17,8 @@ public class RegisterMgr {
 	
 	
 	private final int TOTAL_REGS = 32;
-	private List<RegisterCell> dataRegs;
+	private List<RegisterCell> rRegs;
+	private List<RegisterCell> fRegs;
 	private RegisterCell hi;
 	private RegisterCell lo;
 	private Map<String, RegisterCell> internalRegs;
@@ -42,12 +43,19 @@ public class RegisterMgr {
 	public static final String MEM_WB_LMD = "MEM/WB.LMD";	
 	public static final String MEM_WB_IR = "MEM/WB.IR";
 	
+	private RegisterListener listener;
 	
 	private RegisterMgr() {
-		dataRegs = new ArrayList<>();
+		rRegs = new ArrayList<>();
 		for (int i = 0; i < TOTAL_REGS; i++) {
-			dataRegs.add(new RegisterCell());
+			rRegs.add(new RegisterCell());
 		}
+		
+		fRegs = new ArrayList<>();
+		for (int i = 0; i < TOTAL_REGS; i++) {
+			fRegs.add(new RegisterCell());
+		}
+		
 		lo = new RegisterCell();
 		hi = new RegisterCell();
 		
@@ -74,6 +82,11 @@ public class RegisterMgr {
 	}
 	
 	
+	public void setListener(RegisterListener listener) {
+		this.listener = listener;
+	}
+	
+	
 	public long getValue(String key) {
 		long value; 
 		if (key.equals("hi")) {
@@ -87,28 +100,82 @@ public class RegisterMgr {
 	}
 	
 	
-	public long getValue(int index) {
-		return dataRegs.get(index).getValue();
+	private Map<String, RegisterCell> oldInternalRegs;
+	
+	public void cloneInternalRegs() {
+		oldInternalRegs = new HashMap<>();
+		for (String key : internalRegs.keySet()) {
+			long value = internalRegs.get(key).getValue();
+			RegisterCell cell = new RegisterCell();
+			cell.setValue(value);
+			oldInternalRegs.put(key, cell);
+		}
+	}
+	
+	public long getOldValue(String key) {
+		return oldInternalRegs.get(key).getValue();
 	}
 	
 	
-	public void setValue(int index, long value) {
+	
+	public long getRValue(int index) {
+		return rRegs.get(index).getValue();
+	}
+	
+	
+	public void setRValue(int index, long value) {
 		if (index == 0) { 
 			return; 
 		}
-		dataRegs.get(index).setValue(value);
+		rRegs.get(index).setValue(value);
 	}
 	
 	
+	public long getFValue(int index) {
+		return fRegs.get(index).getValue();
+	}
+	
+	
+	public void setFValue(int index, long value) {
+		fRegs.get(index).setValue(value);
+	}
+	
+
 	public void setValue(String key, long value) {
-		if (key.equals("hi")) {
+		if (key.startsWith("r")) {
+			int index = Integer.valueOf(key.substring(1));
+			if (index == 0) {
+				return;
+			}
+			this.setRValue(index, value);
+			if (listener != null) {
+				listener.rChanged(index, value);
+			}
+		
+		} else if (key.startsWith("f")) {
+			int index = Integer.valueOf(key.substring(1));
+			this.setFValue(index, value);
+			if (listener != null) {
+				listener.fChanged(index, value);
+			}
+		
+		} else if (key.equals("hi")) {
 			hi.setValue(value);
+			if (listener != null) {
+				listener.hiChanged(value);
+			}
+		
 		} else if (key.equals("lo")){
 			lo.setValue(value);
+			if (listener != null) {
+				listener.loChanged(value);
+			}
+		
 		} else {
 			internalRegs.get(key).setValue(value);
 		}
-	}
+	} 
+	
 	
 	public Map<String, Long> getInternalRegs() {
 		Map<String, Long> result = new HashMap<>();
@@ -118,6 +185,7 @@ public class RegisterMgr {
 		
 		return result;
 	}
+	
 	
 	public void incrementPc() {
 		RegisterCell pc = internalRegs.get(PC);
@@ -135,12 +203,12 @@ public class RegisterMgr {
 	}
 	
 	
-	public boolean exMemCodeIsBranch() {
+	public boolean exMemCodeWasBranch() {
 		return exMemCodeIsBranch;
 	}
 	
 	
-	public void setExMemCodeIsBranch(boolean value) {
+	public void setExMemCodeWasBranch(boolean value) {
 		exMemCodeIsBranch = value;
 	}
 }

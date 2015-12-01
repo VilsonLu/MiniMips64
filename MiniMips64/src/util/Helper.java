@@ -22,13 +22,18 @@ public class Helper {
 	
 	
 	public static String IntToBinary16(long number) {
-		return String.format("%16d", Long.parseLong(IntToBinary(number)));
+		return String.format("%016d", Long.parseLong(IntToBinary(number)));
 	}
 	
 	
 	public static String IntToBinary6(int number) {
 		return String.format("%06d", Integer.parseInt(IntToBinary(number)));
 	}
+	
+	public static String IntToBinary26(long number) {
+		return String.format("%026d", Long.parseLong(IntToBinary(number)));
+	}
+	
 	
 	
 	/**

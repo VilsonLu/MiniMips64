@@ -15,8 +15,8 @@ public abstract class AluInstruction extends Instruction {
 	
 	public void ex() {
 		RegisterMgr regs = RegisterMgr.getInstance();
-		regs.setExMemCodeIsBranch(false);
-		long ir = regs.getValue(RegisterMgr.ID_EX_IR);
+		regs.setExMemCodeWasBranch(false);
+		long ir = regs.getOldValue(RegisterMgr.ID_EX_IR);
 		
 		regs.setValue(RegisterMgr.EX_MEM_IR, ir);
 		regs.setValue(RegisterMgr.EX_MEM_COND, 0);
@@ -26,8 +26,8 @@ public abstract class AluInstruction extends Instruction {
 	
 	public void mem() {
 		RegisterMgr regs = RegisterMgr.getInstance();
-		long ir = regs.getValue(RegisterMgr.EX_MEM_IR);
-		long aluoutput = regs.getValue(RegisterMgr.EX_MEM_ALUOUTPUT);
+		long ir = regs.getOldValue(RegisterMgr.EX_MEM_IR);
+		long aluoutput = regs.getOldValue(RegisterMgr.EX_MEM_ALUOUTPUT);
 		regs.setValue(RegisterMgr.MEM_WB_IR, ir);
 		regs.setValue(RegisterMgr.MEM_WB_ALUOUTPUT, aluoutput);
 	}
@@ -35,7 +35,7 @@ public abstract class AluInstruction extends Instruction {
 	
 	public void wb() {
 		RegisterMgr regs = RegisterMgr.getInstance();
-		long aluoutput = regs.getValue(RegisterMgr.MEM_WB_ALUOUTPUT);
+		long aluoutput = regs.getOldValue(RegisterMgr.MEM_WB_ALUOUTPUT);
 		regs.setValue(this.getOpcode().getDestination(), aluoutput);	
 	}
 }

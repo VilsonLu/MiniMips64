@@ -1,3 +1,4 @@
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -22,11 +23,77 @@ public class Tests {
 //			new Tests().testImm();
 //			new Tests().testSignExtend();
 //			new Tests().testMemory();
-			new Tests().testPipeline();
+//			new Tests().testPipeline();
+//			new Tests().testFloat();
+//			new Tests().testMem();
+			new Tests().testMemStore();
+//			new Tests().testBigInt();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	void testBigInt() {
+		long a = 0x7FFFFFFF;
+		long b = 0x7FFFFFFF;
+		BigInteger bigA = new BigInteger(Long.toString(a));
+		BigInteger bigB = new BigInteger(Long.toString(b));
+		BigInteger sum = bigA.multiply(bigB);
+		BigInteger divisor = new BigInteger("100000000", 16);
+		BigInteger bigHi = sum.divide(divisor);
+		BigInteger bigLo = sum.mod(divisor);
+		
+		long hi = bigHi.longValue();
+		long lo = bigLo.longValue();
+		
+		System.out.println(Long.toHexString(hi));
+		System.out.println(Long.toHexString(lo));
+	}
+	
+	void testMemStore() {
+		byte[] values = new byte[4];
+		long alu = 0x04030201;
+		for (int i = 0; i < 4; i++) {
+			 byte value = (byte) ((byte) alu % 0x100);
+			 alu = alu / 0x100;
+			 values[i] = value;
+		}
+		for (int i = 0; i < 4; i++) {
+			System.out.println(values[i]);
+		}
+		
+	}
+	
+	
+	
+	void testMem() {
+		byte[] values = new byte[] {1, 2, 3, 4};
+		long value = 0;
+		for (int i = 0; i < 4; i++) {
+			value = value << 8;
+			byte b = values[i];
+			value += b;
+		}
+		System.out.println(Long.toHexString(value));
+	}
+	
+	void testFloat() {
+		Float a = 3.0f;
+		Float b = 5.0f;
+		
+		// kunwari galing registers
+		long fs  =  Float.floatToIntBits(a);
+		long ft = Float.floatToIntBits(b); 
+		
+		Float fsfloat = Float.intBitsToFloat((int) fs);
+		Float ftfloat = Float.intBitsToFloat((int) ft);
+		
+		Float sum = fsfloat + ftfloat;
+		System.out.println(sum);
+		long result = (long) Float.floatToIntBits(sum);
+		
+		System.out.println("result: " + Long.toHexString(result));
 	}
 	
 	
@@ -37,14 +104,14 @@ public class Tests {
 		}
 		
 		RegisterMgr regs = RegisterMgr.getInstance();
-		regs.setValue(1, 3);
-		regs.setValue(2, 5);
-		regs.setValue(3, 7);
+		regs.setRValue(1, 3);
+		regs.setRValue(2, 5);
+		regs.setRValue(3, 7);
 		
 		UiFacade ui = new UiFacade();
-		ui.setRegister(1, 3);
-		ui.setRegister(2, 5);
-		ui.setRegister(3, 7);
+		ui.setR(1, 3);
+		ui.setR(2, 5);
+		ui.setR(3, 7);
 		
 		Instruction a = new Daddu("4,1,2");
 		Instruction b = new Or("5,2,3");
@@ -55,15 +122,15 @@ public class Tests {
 		InstructionMgr instructions = InstructionMgr.getInstance();
 		instructions.setInstructions(list);
 		
-		System.out.println(regs.getValue(4));
+		System.out.println(regs.getRValue(4));
 		
 		Pipeline pipeline = new Pipeline();
 		Scanner scan = new Scanner(System.in);
 		for (int i = 0; i < 10; i++) {
 			pipeline.performCycle();
 			pipeline.printContents();
-			long value = regs.getValue(4);
-			ui.setRegister(4, value);
+			long value = regs.getRValue(4);
+			ui.setR(4, value);
 			ui.setInternalRegisters(regs.getInternalRegs());
 			scan.nextLine();
 			System.out.println("-----\n");

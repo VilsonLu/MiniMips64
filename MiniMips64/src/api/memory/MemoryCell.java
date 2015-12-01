@@ -29,6 +29,17 @@ public class MemoryCell {
 	}
 	
 	
+	long getLong() {
+		long result = 0;
+		for (int i = 0; i < BYTES; i++) {
+			byte value = values[i];
+			long converted = value << (i * 8) & 0xFFFF_FFFFL;
+			result += converted;
+		}
+		return result;
+	}
+	
+	
 	void setValue(byte[] values) {
 		this.values = values;
 	}

@@ -6,8 +6,6 @@ import java.util.List;
 import util.Helper;
 
 public class Itype extends Opcode {
-	private int rs;
-	private int rt;
 	private long imm;
 	
 	
@@ -42,8 +40,8 @@ public class Itype extends Opcode {
 	
 	
 	public String getBinaryCode() {
-		return Helper.IntToBinary6(this.getNumCode()) + Helper.IntToBinary5(rs) 
-			+ Helper.IntToBinary5(rt) + Helper.IntToBinary16(imm);
+		return Helper.IntToBinary6(this.getNumCode()) + Helper.IntToBinary5(this.getRs()) 
+			+ Helper.IntToBinary5(this.getRt()) + Helper.IntToBinary16(imm);
 	}
 
 	
@@ -68,8 +66,8 @@ public class Itype extends Opcode {
 	@Override
 	public List<String> getInputs() {
 		ArrayList<String> inputs = new ArrayList<>();
-		if (this.getRt() != 0) {
-			inputs.add("r"+ this.getRt());	
+		if (this.getRs() != 0) {
+			inputs.add("r"+ this.getRs());	
 		}
 		return null;
 	}

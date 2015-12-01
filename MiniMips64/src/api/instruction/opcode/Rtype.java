@@ -6,8 +6,6 @@ import java.util.List;
 import util.Helper;
 
 public class Rtype extends Opcode {
-	private int rs;
-	private int rt;
 	private int rd;
 	private int func;
 	
@@ -18,9 +16,11 @@ public class Rtype extends Opcode {
 	}
 	
 	
+	@Override
 	public String getBinaryCode() {
-		return Helper.IntToBinary6(this.getNumCode()) + Helper.IntToBinary5(rs) + Helper.IntToBinary5(rt)
-				+ Helper.IntToBinary5(rd) + Helper.IntToBinary5(0) + Helper.IntToBinary6(func);
+		return Helper.IntToBinary6(this.getNumCode()) + Helper.IntToBinary5(this.getRs()) 
+		+ Helper.IntToBinary5(this.getRt()) + Helper.IntToBinary5(rd) 
+		+ Helper.IntToBinary5(0) + Helper.IntToBinary6(func);
 	}
 
 	public String getStringCode2regs() {

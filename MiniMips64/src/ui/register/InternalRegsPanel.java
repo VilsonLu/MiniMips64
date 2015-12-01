@@ -35,6 +35,7 @@ public class InternalRegsPanel extends JPanel {
 	public InternalRegsPanel() {
 		this.setOrders();
 		this.initComponents();
+		// TODO make internal regs initialize the values 
 	}
 	
 	
