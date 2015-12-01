@@ -18,12 +18,16 @@ public abstract class BranchInstruction extends Instruction {
 		regs.setValue(RegisterMgr.EX_MEM_ALUOUTPUT, aluoutput);
 	}
 	
+	
 	public void mem() {
 		RegisterMgr regs = RegisterMgr.getInstance();
 		regs.setValue(RegisterMgr.EX_MEM_COND, 0);
 	}
 	
+	
+	@Override
 	public void wb() {}
+	
 	
 	abstract long getExOperation();
 }

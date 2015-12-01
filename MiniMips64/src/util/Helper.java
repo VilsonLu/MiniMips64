@@ -30,6 +30,11 @@ public class Helper {
 		return String.format("%06d", Integer.parseInt(IntToBinary(number)));
 	}
 	
+	public static String IntToBinary26(long number) {
+		return String.format("%026d", Long.parseLong(IntToBinary(number)));
+	}
+	
+	
 	
 	/**
 	 * Pads the value with zeros and adds spaces every 4 digits.
